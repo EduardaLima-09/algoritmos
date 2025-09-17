@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05B - Exercicio 04</title>
+</head>
+<body>
+    <h4>Análise de Parcelamento de Compra</h4>
+    Modo de pagamento dentre as seguintes opções(Dinheiro, Cartão de débito, Cartão de crédito, Boleto)
+    <input id="iptModoPgto"> <br>
+    <button onclick="analisar()">Analisar compra</button>
+</body>
+<script>
+    function analisar() {
+        if (iptModoPgto.value == 'dinheiro' || iptModoPgto.value == 'débito') {
+            alert('Você terá que pagar a vista');
+        } else if (iptModoPgto.value == 'crédito' || iptModoPgto.value == 'boleto') {
+            alert('Pagamento poderá ser parcelado');
+        }
+    }
+</script>
+</html>

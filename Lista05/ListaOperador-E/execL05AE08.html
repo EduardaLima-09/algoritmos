@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 08</title>
+</head>
+<body>
+    <h3>Login Seguro: Verificação em Duas Etapas!</h3>
+    Login do usuário: <input id="iptLogin"> <br>
+    Senha do usuário: <input type="password" id="iptSenha"> <br>
+    Código de segurança: <input type="password" id="iptConfirmacao"> <br><br>
+    <button onclick="entrar()">Entrar</button>
+</body>
+<script>
+    function entrar() {
+        if (iptLogin.value == 'SPTech' && iptSenha.value == 'digital' && iptConfirmacao.value == '123') {
+            alert('Usuário autenticado com sucesso');
+        } else {
+            alert('Falha na autenticação');
+        }
+    }
+</script>
+</html>

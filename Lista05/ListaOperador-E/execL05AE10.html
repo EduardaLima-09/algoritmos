@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 10</title>
+</head>
+<body>
+    <h4>Recarga Fidelidade Metrô: Economize com Descontos Especiais!</h4>
+    Informe a quantidade de passagens que deseja adquirir: <input id="iptQtdPassagem"> <br>
+    <button onclick="comprar()">Comprar</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function comprar() {
+        var qtdPassagem =  Number(iptQtdPassagem.value);
+        precoPassagem = qtdPassagem * 4.40;
+
+        if (qtdPassagem < 8 ||  qtdPassagem > 50) {
+            alert('Quantidade inválida para o Fidelidade!');
+        } else {
+            if (qtdPassagem >= 8 && qtdPassagem <= 19) {
+                precoPassagem = precoPassagem * 0.97;
+                divMsg.innerHTML = 'Total a pagar: ' + precoPassagem.toFixed(2) + ' com um desconto de 3%'
+            } else if (qtdPassagem >= 20 && qtdPassagem <= 49) {
+                precoPassagem = precoPassagem * 0.95;
+                divMsg.innerHTML = 'Total a pagar: ' + precoPassagem.toFixed(2) + ' com um desconto de 5%'
+            } else if (qtdPassagem == 50) {
+                precoPassagem = precoPassagem * 0.93;
+                divMsg.innerHTML = 'Total a pagar: ' + precoPassagem.toFixed(2) + ' com um desconto de 7%'
+            }
+        }
+    }
+</script>
+</html>

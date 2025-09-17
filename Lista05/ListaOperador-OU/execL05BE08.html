@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05B - Exercicio 08</title>
+</head>
+
+<body>
+    <h3>Critérios de Preferência de Augusto Bivio</h3>
+    Nome da empresa: <input id="iptNome"> <br>
+    Valor da bolsa da empresa: <input id="iptBolsaEmpresa"> <br>
+    Valor do VR da empresa: <input id="iptVR"> <br>
+    Tempo de deslocamento da empresa para a SPTech: <input id="iptDeslocamento"> <br>
+    <button onclick="preferida()">É preferida?</button>
+</body>
+<script>
+    function preferida() {
+        var nome = iptNome.value;
+        var bolsaEmpresa = Number(iptBolsaEmpresa.value);
+        var vrEmpresa = Number(iptVR.value);
+        var deslocamento = Number(iptDeslocamento.value);
+
+        if (bolsaEmpresa >= 1800 || vrEmpresa >= 20 || deslocamento <= 30 ) {
+            alert(`A empresa ${nome} é uma de suas preferências`);
+        } else {
+            alert(`A empresa ${nome} está fora da sua lista`);
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05B - Exercicio 01</title>
+</head>
+<body>
+    <h4>Juliane Joada e Suas Frutas Preferidas</h4>
+    Nome da fruta que chegou na mesa: <input id="iptFruta"> <br>
+    <button onclick="comer()">Vai comer?</button>
+</body>
+<script>
+    function comer() {
+        var fruta = iptFruta.value;
+
+        if (fruta == 'Uva' || fruta == 'Abacaxi') {
+            alert(`Sim vai comer ${fruta}`);
+        } else {
+            alert(`A fruta ${fruta} ela não come`);
+        }
+    }
+</script>
+</html>

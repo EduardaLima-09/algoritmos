@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 09</title>
+</head>
+
+<style>
+    body {
+        background-image: url(https://e0.pxfuel.com/wallpapers/491/914/desktop-wallpaper-ayrton-senna-with-resolution-senna.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    h4 {
+        color: white;
+    }
+
+</style>
+
+<body>
+    <h4>Seleção de Pilotos: Você Tem a Altura Ideal?</h4>
+    Altura inicial: <input id="iptAlturaInicial"> <br><br>
+    Altura final: <input id="iptAlturaFinal"> <br><br>
+    Nome do piloto: <input id="iptNome"> <br><br>
+    Altura do piloto: <input id="iptAltura"> <br><br>
+    <button onclick="verificar()">Verificar Candidato</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function verificar() {
+        var alturaInicial = Number(iptAlturaInicial.value);
+        var alturaFinal = Number(iptAlturaFinal.value);
+        var alturaCandidato = Number(iptAltura.value);
+        var nome = iptNome.value;
+
+        if (alturaInicial <= 0 || alturaFinal <= alturaInicial) {
+            alert('Intervalo da altura de seleção é inválida! A altura inicial deve ser maior que 1 e a altura final deve ser maior que a altura inicial.');
+        } else if (alturaCandidato > alturaInicial && alturaCandidato <= alturaFinal) {
+            divMsg.innerHTML += '<br> O candidato ' + iptNome.value + ', com altura de  ' + iptAltura.value +
+                ' metros, participará do processo de seleção de piloto.'
+        } else {
+            divMsg.innerHTML += '<br> Infelizmente, o candidato ' + iptNome.value + ', com altura de'
+                + iptAltura.value + ' metros, não atende os requisitos da seleção.'
+        }
+    }
+</script>
+
+</html>

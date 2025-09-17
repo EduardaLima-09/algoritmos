@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 01</title>
+</head>
+<body>
+    <h3>Conforto Térmico: A Temperatura Está Ideal?</h3>
+    Temperatura atual : <input id="iptTemperatura"> <br>
+    <button onclick="verificar()">Ver situação</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function verificar() {
+        var temperatura = Number(iptTemperatura.value);
+
+        if (temperatura >= 21 && temperatura <= 24) {
+            alert('Temperatura confortável :D');
+        } else {
+            alert('Temperatura DESCONFORTÁVEL :C');
+        }
+    }
+</script>
+</html>

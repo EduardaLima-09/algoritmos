@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05B - Exercicio 03</title>
+</head>
+<body>
+    <h3>Auxílio Emergencial Covid-19</h3>
+    Solicite o valor da renda individual: <input id="iptRendaIndividual"> <br>
+    Solicite o valor da renda familiar: <input type="iptRendaFamiliar"> <br>
+    <button onclick="beneficio()">Terei o benefício</button>
+</body>
+<script>
+    function beneficio() {
+        var rendaIndividual = Number(iptRendaIndividual.value);
+        var rendaFamiliar = Number(iptRendaFamiliar.value);
+
+        if (rendaFamiliar < 0 || rendaIndividual < 0) {
+            alert('Insira valores válidos');
+        } else {
+            if (rendaIndividual <= 2000 || rendaFamiliar <= 3000) {
+                alert('Você terá direito ao auxílio');
+            } else {
+                alert('Sem direito ao auxílio');
+            }
+        }
+    }
+</script>
+</html>

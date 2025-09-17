@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 07</title>
+</head>
+<body>
+    <h3>Sistema de Login: Autentique-se para Acessar!</h3>
+    Login do usuário: <input id="iptLogin"> <br>
+    Senha do usuário: <input type="password" id="iptSenha"> <br><br>
+    <button onclick="entrar()">Entrar</button>
+</body>
+<script>
+    function entrar() {
+        if (iptLogin.value == 'SPTech' && iptSenha.value == 'digital') {
+            alert('Usuário autenticado com sucesso');
+        } else {
+            alert('Falha na autenticação');
+        }
+    }
+</script>
+</html>

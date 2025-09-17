@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 02</title>
+</head>
+
+<body>
+    <h3>Auxílio Covid-19: Você Tem Direito ao Benefício?</h3>
+    Sua renda (individual): <input id="iptRenda"> <br>
+    Renda total familiar : <input id="iptRendaFamiliar"> <br>
+    <button onclick="verificar()">Verificar ajuda</button> <br><br>
+</body>
+<script>
+    function verificar() {
+        var rendaIndividual = Number(iptRenda.value);
+        var rendaFamiliar = Number(iptRendaFamiliar.value);
+
+        if (rendaFamiliar <= 0 || rendaIndividual <= 0) {
+            alert('Entre com um número válido, maior que 0')
+        } else {
+            if (rendaIndividual <= 1050 && rendaFamiliar <= 2100) {
+                alert('Você terá direito!');
+            } else {
+                alert('Você NÃO terá direito');
+            }
+        }
+
+    }
+</script>
+
+</html>

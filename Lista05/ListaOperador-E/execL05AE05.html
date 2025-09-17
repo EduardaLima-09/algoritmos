@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05A - Exercicio 05</title>
+</head>
+
+<body>
+    <h3>Desempenho Escolar: Como Está Sua Nota?</h3>
+    Nota do aluno: <input id="iptNota"> <br>
+    <button onclick="avaliar()">Avaliar aluno</button>
+</body>
+<script>
+    function avaliar() {
+        var nota = Number(iptNota.value);
+
+        if (nota < 0) {
+            alert('Insira uma nota válida!');
+        } else {
+            if (nota <= 6) {
+                alert('Aluno não aprovado');
+            } else if (nota > 8.5 && nota <= 10) {
+                alert('Aluno Exemplar!');
+            } else {
+                if (nota <= 8.5) {
+                    alert('Aluno comum e aprovado');
+                }
+            }
+        }
+    }
+</script>
+
+</html>

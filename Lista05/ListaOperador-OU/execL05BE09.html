@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05B - Exercicio 09</title>
+</head>
+<body>
+    <h3>Analisador de Compra: Escolhendo a Melhor TV Dentro do Orçamento</h3>
+    Marca da TV (dentre as opções "Samsung", "LG", "Mondial" e "Britânia"): 
+    <input id="iptMarcaTV"> <br>
+    Preço da TV: <input id="iptPrecoTV"> <br>
+    <button onclick="analisar()">Analisar compra</button>
+</body>
+<script>
+    function analisar() {
+        var marcaTV = iptMarcaTV.value;
+        var precoTV = Number(iptPrecoTV.value);
+
+        if (precoTV < 800) {
+            alert('Preço baixo demais!');
+        } 
+        else if (precoTV > 2000) {
+            alert('TV cara demais, infelizmente');
+        } 
+        else if (marcaTV == 'Mondial' || marcaTV == 'Britânia') {
+            alert('Na faixa de preço, porém marca não confiável');
+        } 
+        else if (marcaTV == 'LG' || marcaTV == 'Samsung') {
+            alert('Essa TV pode entrar na sua lista!');
+        } 
+    }
+</script>
+</html>
