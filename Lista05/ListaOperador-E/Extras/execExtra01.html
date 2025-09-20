@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Corrida - Carrara Drivers</title>
+</head>
+<body>
+    <span>Agostinho é um taxista do Rio de Janeiro que deseja automatizar sua frota de táxis (Carrara Drivers)</span>
+    <br><br>
+
+    Nome do passageiro: <input type="text" id="iptNomePassageiro"><br><br>
+    Distância (km): <input id="iptDistancia"><br><br>
+    Bandeira (1, 2 ou 3): <input id="iptBandeira"><br><br>
+    Horário da corrida (0-23): <input id="iptHorarioCorrida"><br><br>
+    <button onclick="calcular()">Calcular corrida</button>
+
+    <div id="divMsg" style="margin-top:20px; font-weight:bold;"></div>
+
+</body>
+<script>
+function calcular() {
+    var passageiro = iptNomePassageiro.value;
+    var distancia = Number(iptDistancia.value);
+    var bandeira = Number(iptBandeira.value);
+    var horarioCorrida = Number(iptHorarioCorrida.value);
+
+    if (!passageiro) { 
+        alert('Digite o nome do passageiro!'); 
+    }
+    if (distancia <= 0) { 
+        alert('Digite uma distância válida!'); 
+    }
+    if (bandeira < 1 || bandeira > 3) { 
+        alert('Bandeira inválida! Escolha 1, 2 ou 3');
+    }
+    if (horarioCorrida < 0 || horarioCorrida > 23) { 
+        alert('Horário inválido!');
+    }
+
+    var valorCorrida = distancia * 1.25;
+
+    if (bandeira == 1 && horarioCorrida >= 0 && horarioCorrida <= 6) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.05);
+    } else if (bandeira == 1 && horarioCorrida >= 7 && horarioCorrida <= 12) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.10);
+    } else if (bandeira == 1 && horarioCorrida >= 13 && horarioCorrida <= 23) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.15);
+    } else if (bandeira == 2 && horarioCorrida >= 0 && horarioCorrida <= 6) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.10);
+    } else if (bandeira == 2 && horarioCorrida >= 7 && horarioCorrida <= 12) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.20);
+    } else if (bandeira == 2 && horarioCorrida >= 13 && horarioCorrida <= 23) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.30);
+    } else if (bandeira == 3 && horarioCorrida >= 0 && horarioCorrida <= 6) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.15);
+    } else if (bandeira == 3 && horarioCorrida >= 7 && horarioCorrida <= 12) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.30);
+    } else if (bandeira == 3 && horarioCorrida >= 13 && horarioCorrida <= 23) {
+        valorCorrida = valorCorrida + (valorCorrida * 0.45);
+    }
+
+    divMsg.innerHTML = `Olá ${passageiro}, sua corrida será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de R$ ${valorCorrida.toFixed(3)}`;
+}
+</script>
+</html>

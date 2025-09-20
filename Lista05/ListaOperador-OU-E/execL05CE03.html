@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista 05C - Exercicio 03</title>
 </head>
+
 <body>
     <h3>Simulador de Preço do Bilhete Único de São Paulo</h3>
-    Selecione o tipo de bilhete: 
+    Selecione o tipo de bilhete:
     <select id="sel_Tipo">
         <option value="0">Selecione...</option>
         <option value="1">Comum</option>
         <option value="2">Estudante</option>
         <option value="3">Idoso/PNE</option>
-    </select> 
-    <br>
-    Tipo passagem: 
-    <select id="sel_Passagem">
-        <option value="0"></option>
-        <option value="4">Passagem única</option>
-        <option value="5"> Passagem integração</option>
     </select>
-    <br>
-    <button onclick="simular()">Simular preço</button>
+    <br><br>
+    Tipo passagem:
+    <select id="sel_Passagem">
+        <option value="0">Selecione...</option>
+        <option value="1">Passagem única</option>
+        <option value="2">Passagem integração</option>
+    </select>
+    <br><br>
+    <button onclick="simular()">Simular preço</button> <br><br>
+    <div id="divMsg"></div>
 </body>
 <script>
     function simular() {
         var tipo = sel_Tipo.value;
         var passagem = sel_Passagem.value;
+        var valor = 0;
 
-        var semIntegracao = passagem * 4.40;
-        var integracao = passagem * 5.90;
+        // preço das passagens
+        if (passagem == 1) {
+            valor = 4.40;
+        } else if (passagem == 2) {
+            valor = 5.90;
+        }
 
-        if (sel_Tipo.value == 1 || sel_passagem == 5) {
-            
-            divMsg.innerHTML = 'Valor da passagem escolhida: R$' + integracao.toFixed(2)
-        } 
+        // caso seja estudante o idoso
+        if (tipo == 2) {
+            valor = valor / 2; 
+        } else if (tipo == 3) {
+            valor = 0; 
+        }
+
+        divMsg.innerHTML= 'Valor da passagem escolhida: R$' + valor.toFixed(2)
     }
 </script>
+
 </html>

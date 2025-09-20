@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 05C - Exercicio 06</title>
+</head>
+<body>
+    <h4>Desempenho Escolar: O Aluno Foi Aprovado?</h4>
+    Nota: <input id="iptNota"> <br>
+    Frequência: <input id="iptFrequencia"> <br><br>
+    <button onclick="analisar()">Analisar aluno</button>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function analisar() {
+        var nota = Number(iptNota.value);
+        var freq = Number(iptFrequencia.value);
+        var resultado = '';
+
+        if (nota < 0 || nota > 10) {
+            alert('Onde já se viu nota menor que 0 ou maior que 10?!');
+        } else if (freq < 0 || freq > 100) {
+            alert("Onde já se viu frequência <0 ou >100?!");
+        } else {
+            if (nota < 6) {
+                resultado += 'Aluno ficou abaixo da média<br>';
+            } else if (nota <= 8) {
+                resultado += 'Aluno ficou na média<br>';
+            } else {
+                resultado += 'Aluno acima da média<br>';
+            }
+
+            if (freq >= 75) {
+                resultado += 'Aluno aprovado por frequência';
+            } else {
+                resultado += 'Aluno reprovado por frequência';
+            }
+        }
+
+        divMsg.innerHTML = resultado;
+    }
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticação Segura</title>
+</head>
+<body>
+    <h4>Autenticação Segura</h4>
+    Login: <input id="entradaLogin"> <br>
+    Senha: <input id="entradaSenha" type="password"> <br>
+    Informação pessoal: <input id="entradaInformacao"> <br><br>
+    <button onclick="autenticar()">Autenticar</button>
+    <div id="mensagemAutenticacao"></div>
+    <div id="mensagemTentativas"></div>
+</body>
+<script>
+var tentativasRestantes = 3
+
+function autenticar() {
+    var loginDigitado = entradaLogin.value
+    var senhaDigitada = entradaSenha.value
+    var informacaoDigitada = entradaInformacao.value
+
+    if (tentativasRestantes == 0) {
+        mensagemAutenticacao.innerHTML = "Falha na autenticação"
+        mensagemTentativas.innerHTML = "Usuário BLOQUEADO! Procure seu gerente!"
+    } else {
+        if (loginDigitado == "ana" && senhaDigitada == "braga" && (informacaoDigitada == "1949" || informacaoDigitada == "louro josé")) {
+            mensagemAutenticacao.innerHTML = "Usuário autenticado"
+            mensagemTentativas.innerHTML = ""
+            tentativasRestantes = 3
+        } else {
+            tentativasRestantes = tentativasRestantes - 1
+            mensagemAutenticacao.innerHTML = "Falha na autenticação"
+            if (tentativasRestantes > 0) {
+                mensagemTentativas.innerHTML = "Você ainda tem " + tentativasRestantes + " tentativa(s)"
+            } else {
+                mensagemTentativas.innerHTML = "Usuário BLOQUEADO! Procure seu gerente!"
+            }
+        }
+    }
+}
+</script>
+</html>

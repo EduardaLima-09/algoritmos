@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio Extra</title>
+</head>
+<body>
+    <h4>Sistema de Recompensas e Descontos</h4>
+    Quantidade de Produtos: <input id="ipt_quantidade_produtos"> <br>
+    Valor Total (R$): <input id="ipt_valor_total"> <br>
+    Cliente VIP: <input type="checkbox" id="check_cliente_vip"> <br><br>
+    <button onclick="analisar()">Analisar Cliente</button>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function analisar() {
+        var qtdeProdutos = Number(ipt_quantidade_produtos.value);
+        var valorTotal = Number(ipt_valor_total.value);
+        var clienteVIP = check_cliente_vip.checked;
+
+        var desconto = 0;
+        var recompensa = 0;
+
+        // Desconto
+        if (clienteVIP) {
+            desconto = valorTotal * 0.15;
+        } else if (qtdeProdutos > 10 && valorTotal > 1000) {
+            desconto = valorTotal * 0.10;
+        } else if (qtdeProdutos > 5 && valorTotal > 500) {
+            desconto = valorTotal * 0.05;
+        }
+
+        // Recompensa
+        if (clienteVIP || (qtdeProdutos > 5 && valorTotal > 200)) {
+            recompensa += 50;
+        }
+        if (qtdeProdutos > 10 && valorTotal > 500) {
+            recompensa += 100;
+        }
+
+        divMsg.innerHTML = 'O valor do desconto: R$ ' + desconto.toFixed(2) + '<br>' +
+            'Recompensa: ' + recompensa + ' pontos acumulados';
+    }
+</script>
+</html>

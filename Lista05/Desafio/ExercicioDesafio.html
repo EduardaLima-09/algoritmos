@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio Desafio - Algoritmos</title>
+</head>
+
+<body>
+    <h4>Sari Edacos</h4>
+    <div id="divParte1">
+        Salário Inicial: <input id="iptSalarioInicial"> <br>
+        Salário Final: <input id="iptSalarioFinal"> <br>
+        Mês Corrente: <input id="iptMes"> <br><br>
+        <button onclick="registrar()">Registrar Parâmetros</button>
+    </div>
+    <div id="divParte2">
+        Nome Funcionário: <input id="iptNomeFuncionario"> <br>
+        Salário Funcionário: <input id="iptSalarioFuncionario"> <br>
+        Quantidade de cadeiras: <br>
+        Praia: <input id="iptCadeiraPraia"> <br>
+        Jardim: <input id="iptCadeiraJardim"> <br>
+        Pesca: <input id="iptCadeiraPesca"> <br>
+        <button onclick="pagar()">Pagar Salário</button>
+    </div>
+    <div id="divParte4"></div>
+    <button onclick="encerrar()">Encerrar o dia</button>
+    <div id="divResumo"></div>
+</body>
+<script>
+
+    var salarioInicialIntervalo = 0;
+    var salarioFinalIntervalo = 0;
+    var mesCorrente = 0;
+
+    var totalPraiaQtde = 0;
+    var totalJardimQtde = 0;
+    var totalPescaQtde = 0;
+
+    var totalPraiaValor = 0;
+    var totalJardimValor = 0;
+    var totalPescaValor = 0;
+
+    function registrar() {
+        var salarioInicial = Number(iptSalarioInicial.value);
+        var salarioFinal = Number(iptSalarioFinal.value);
+        var mes = Number(iptMes.value);
+
+        // Validações 
+        if (salarioInicial <= 3000) {
+            alert('Salário inicial deve ser maior que 3000');
+        }
+        if (salarioFinal >= salarioInicial * 4) {
+            alert('Salário final deve ser menor que 4 vezes o salário inicial');
+        }
+        if (mes < 1 || mes > 12) {
+            alert('Mês deve estar entre 1 e 12');
+        }
+
+        salarioInicialIntervalo = salarioInicial;
+        salarioFinalIntervalo = salarioFinal;
+        mesCorrente = mes;
+
+        divParte1.innerHTML = 'Parâmetros registrados com sucesso!';
+        divParte2.style.display = 'block';
+    }
+
+    function pagar() {
+        var nome = iptNomeFuncionario.value;
+        var salarioFuncionario = Number(iptSalarioFuncionario.value);
+        var cadeiraPraia = Number(iptCadeiraPraia.value);
+        var cadeiraJardim = Number(iptCadeiraJardim.value);
+        var cadeiraPesca = Number(iptCadeiraPesca.value);
+
+        // Validação
+        if (!nome) {
+            alert('Informe o nome');
+        }
+        if (salarioFuncionario < salarioInicialIntervalo) {
+            alert('Salário menor que o inicial do intervalo');
+        }
+        if (cadeiraPraia < 0 || cadeiraJardim < 0 || cadeiraPesca < 0) {
+            alert('Quantidade de cadeiras não pode ser negativa');
+        }
+
+        var valorCadeiraPraia = cadeiraPraia * 100;
+        var valorCadeiraJardim = cadeiraJardim * 120;
+        var valorcadeiraPesca = cadeiraPesca * 80;
+
+        // Descontos
+        if (mesCorrente <= 5 || mesCorrente >= 10) {
+            valorCadeiraJardim *= 0.928;
+        } else if ((mesCorrente >= 4 && mesCorrente <= 10) && cadeiraPesca > 3) {
+            valorcadeiraPesca *= 0.9391;
+        }
+
+        var total = valorCadeiraPraia + valorCadeiraJardim + valorcadeiraPesca;
+
+        // Segundo desconto
+        var segundoDesconto = 0;
+        if (total > 400 && cadeiraPraia == 0 && cadeiraPesca > 0) {
+            segundoDesconto = 0.025;
+        } else if (valorCadeiraJardim >= valorCadeiraPraia && valorCadeiraJardim >= valorcadeiraPesca) {
+            segundoDesconto = 0.055;
+        }
+
+        total = total * (1 - segundoDesconto);
+
+        // Limite de compra
+        var limite = salarioFuncionario <= salarioFinalIntervalo ? 0.305 : 0.2075;
+        if (total > salarioFuncionario * limite) {
+            alert('Compra não permitida: Ultrapassa o limite do salário');
+            total = 0; // evita desconto do salário se ultrapassa limite
+        }
+
+        // Salário líquido
+        var salarioLiquido = salarioFuncionario - total;
+
+        // Cálculo das cédulas
+        var restante = Math.floor(salarioLiquido);
+        var cedula200 = Math.floor(restante / 200); restante -= cedula200 * 200;
+        var cedula50 = Math.floor(restante / 50); restante -= cedula50 * 50;
+        var cedula20 = Math.floor(restante / 20); restante -= cedula20 * 20;
+        var cedula5 = Math.floor(restante / 5); restante -= cedula5 * 5;
+        var cedula1 = restante;
+
+        // Atualiza totais globais
+        totalPraiaQtde += cadeiraPraia;
+        totalJardimQtde += cadeiraJardim;
+        totalPescaQtde += cadeiraPesca;
+
+        totalPraiaValor += valorCadeiraPraia;
+        totalJardimValor += valorCadeiraJardim;
+        totalPescaValor += valorcadeiraPesca;
+
+        // Extrato do funcionário
+        divParte4.innerHTML = '<h4>Extrato de: ' + nome + '</h4>' +
+            'Salário bruto: R$' + salarioFuncionario.toFixed(2) + '<br>' +
+            'Salário líquido: R$' + salarioLiquido.toFixed(2) + '<br><br>' +
+            'Cadeiras compradas:<br>' +
+            'Praia: ' + cadeiraPraia + ' x 100 = R$' + valorCadeiraPraia.toFixed(2) + '<br>' +
+            'Jardim: ' + cadeiraJardim + ' x 120 = R$' + valorCadeiraJardim.toFixed(2) + '<br>' +
+            'Pesca: ' + cadeiraPesca + ' x 80 = R$' + valorcadeiraPesca.toFixed(2) + '<br>' +
+            'Desconto adicional: ' + (segundoDesconto * 100).toFixed(2) + '%<br><br>' +
+            'Cédulas para pagamento do salário líquido:<br>' +
+            'R$200: ' + cedula200 + '<br>' +
+            'R$50: ' + cedula50 + '<br>' +
+            'R$20: ' + cedula20 + '<br>' +
+            'R$5: ' + cedula5 + '<br>' +
+            'R$1: ' + cedula1;
+    }
+
+    function encerrar() {
+        var totalQtde = totalPraiaQtde + totalJardimQtde + totalPescaQtde;
+        var totalValor = totalPraiaValor + totalJardimValor + totalPescaValor;
+
+        // Evitar divisão por 0
+        var pctPraiaQtde = 0, pctJardimQtde = 0, pctPescaQtde = 0;
+        var pctPraiaValor = 0, pctJardimValor = 0, pctPescaValor = 0;
+
+        if (totalQtde > 0) {
+            pctPraiaQtde = (totalPraiaQtde / totalQtde * 100).toFixed(2);
+            pctJardimQtde = (totalJardimQtde / totalQtde * 100).toFixed(2);
+            pctPescaQtde = (totalPescaQtde / totalQtde * 100).toFixed(2);
+        }
+        if (totalValor > 0) {
+            pctPraiaValor = (totalPraiaValor / totalValor * 100).toFixed(2);
+            pctJardimValor = (totalJardimValor / totalValor * 100).toFixed(2);
+            pctPescaValor = (totalPescaValor / totalValor * 100).toFixed(2);
+        }
+
+        // Atualiza div do resumo
+        divResumo.innerHTML = '<h4>Resumo do Dia</h4>' +
+            'Praia: Qtde ' + totalPraiaQtde + ', Valor R$' + totalPraiaValor.toFixed(2) +
+            ', Qtde ' + pctPraiaQtde + '%, %Valor ' + pctPraiaValor + '%<br>' +
+            'Jardim: Qtde ' + totalJardimQtde + ', Valor R$' + totalJardimValor.toFixed(2) +
+            ', Qtde ' + pctJardimQtde + '%, %Valor ' + pctJardimValor + '%<br>' +
+            'Pesca: Qtde ' + totalPescaQtde + ', Valor R$' + totalPescaValor.toFixed(2) +
+            ', Qtde ' + pctPescaQtde + '%, %Valor ' + pctPescaValor + '%<br>';
+    }
+</script>
+
+</html>
