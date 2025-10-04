@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 02</title>
+</head>
+<body>
+    <h4>Frase Repetitiva</h4>
+    <button onclick="frase()">Diga algo sobre a matéria de Algoritmos</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function frase() {
+        var contador = 0;
+
+        while (contador < 7) {
+            contador++
+            divMsg.innerHTML += `<br> Algoritmos é muito legal com o Frizza e Davi`
+        }
+    }
+</script>
+</html>

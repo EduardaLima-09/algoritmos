@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 06 - Exercicio 05</title>
+</head>
+
+<body>
+    <h4>Substituidor de Caracteres</h4>
+    Senha do usuário: <input id="iptSenha" onkeyup="substituir()"> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function substituir() {
+        var senha = iptSenha.value;
+        
+        senha = senha.replaceAll('a', '@');
+        senha = senha.replaceAll('A', '@');
+        senha = senha.replaceAll('e', '@');
+        senha = senha.replaceAll('E', '@');
+
+        divMsg.innerHTML = 'Senha forte ' + senha;
+    }
+</script>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 11</title>
+</head>
+
+<body>
+    <h4>Tabuada Colorida</h4>
+    Qual Tabuada?: <input id="iptTabuada"> <br>
+    Até qual número deve ir?: <input id="iptNumero"> <br>
+    <button onclick="tabuada()">Ver Tabuada</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function tabuada() {
+        var numeroDigitado = Number(iptTabuada.value);
+        var numeroEscolhido = Number(iptNumero.value);
+        var contador = numeroDigitado;
+        var result = 0;
+
+        while (contador < numeroEscolhido) {
+            contador++
+            result = numeroDigitado * numeroEscolhido;
+            divMsg.innerHTML += `${numeroDigitado} X ${numeroEscolhido} = ${result}`
+        }
+    }
+</script>
+
+</html>

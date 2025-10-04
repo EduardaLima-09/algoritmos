@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 06 - Exercicio 06</title>
+</head>
+<body>
+    <h4>Observador de Índices</h4>
+    Digite uma frase: <input id="iptFrase" onkeyup="digitar()"> <br><br>
+    Qual letra deseja ver? (começa em 1): <input id="iptPosicao" onkeyup="digitar()"> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function digitar() {
+        var frase = iptFrase.value;
+        var posicao = iptPosicao.value;
+        var letra = frase[posicao -1];
+
+        divMsg.innerHTML = 'A letra está posição ' + posicao + ' e é a letra ' + letra;
+
+    }
+</script>
+</html>

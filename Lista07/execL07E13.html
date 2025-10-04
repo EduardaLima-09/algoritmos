@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 13</title>
+</head>
+<body>
+    <h4>Papagaio Repetitivo</h4>
+    Diga um número: <input id="iptNumero"> <br>
+    Diga uma frase: <input id="iptFrase"> <br>
+    <button onclick="repetir()">Papagaio Repetitivo</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function repetir() {
+        var numero = Number(iptNumero.value);
+        var frase = iptFrase.value;
+        var contador = 0;
+
+        while (contador < numero) {
+            contador++
+            divMsg.innerHTML += `<br> ${contador} - ${frase}`
+        }
+    }
+</script>
+</html>

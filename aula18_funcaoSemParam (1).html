@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parametro</title>
+</head>
+<body>
+    <h2>Validação de Nota</h2>
+    Entre com a nota: <input type="numbe" id="ipt_nota"> <br>
+    <button onclick="validar()">Validar</button>
+</body>
+<script>
+
+    let axNota = 0;
+
+    function validar() {
+        axNota = Number(ipt_nota.value);
+
+        if (axNota%1 != 0) {
+            alert ('A nota tem que ser um número inteiro')
+        } else if (axNota < 0) {
+            alert ('Nota tem que ser positiva')            
+        } else if (axNota > 10) {
+            alert ('Nota tem que ser menor que 11')
+        } else processar();
+    }
+
+    function processar() {
+        alert ('a nota recebida foi ' + axNota);
+    }
+</script>
+</html>

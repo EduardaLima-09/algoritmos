@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 04</title>
+</head>
+<body>
+    <h4>Expressar amor</h4>
+    Nome da pessoa: <input id="iptPessoa"> <br>
+    O quanto você a ama?: <input id="iptAma"> <br>
+    <button onclick="expressar()">Expressar amor</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function expressar() {
+        var pessoa = iptPessoa.value;
+        var amor = Number(iptAma.value);
+        var contador = 0;
+
+        while (contador < amor) {
+            contador++
+            divMsg.innerHTML += `<br> ${contador} - ${pessoa}, eu te amo! Sempre lembre disso!`
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textos</title>
+</head>
+
+<body>
+    <h2>Operações com Textos (String)</h2>
+
+    <!-- onkeyup executa a função/comando logo após acionar uma tecla qualquer -->
+    Digite uma frase: <input id="ipt_frase" onkeyup="analisar()">
+    <br><br>
+    <div id="div_result"></div>
+</body>
+
+</html>
+<script>
+    function analisar() {
+        var ax_frase = ipt_frase.value;
+        var ax_starts = (ax_frase.startsWith('www') || ax_frase.startsWith('https'));
+        var ax_ends = ax_frase.endsWith('.br');
+        
+       
+
+        
+
+        div_result.innerHTML = `A frase está com  ${ax_frase.length} caracteres<br>
+           A frase começa com www ou https - ${ax_starts} <br>
+           A frase termina com .br - ${ax_ends} <br>
+           Na frase contém espaço em qual posição? ${ax_frase.indexOf(' ')} <br>
+           Na frase contem al - ${ax_frase.includes('al',10)} <br><br>
+           A frase em caixa alta = ${ax_frase.toUpperCase()} <br>
+           A frase em caixa baixa = ${ax_frase.toLowerCase()} <br>
+           A frase original = ${ax_frase} <br>
+           Qual é a primeira letra = ${ax_frase[0]} <br>
+           Qual é a 10ª letra = ${ax_frase[9]} <br>
+           Qual é a ultima letra = ${ax_frase[ax_frase.length - 1]} <br>
+           Trocando a por @ e por & i por 1 = 
+           ${ax_frase.replaceAll('a','@').replaceAll('e','&').replaceAll('i','1')} <br>
+           `;
+
+        
+
+        
+
+
+    }
+
+</script>

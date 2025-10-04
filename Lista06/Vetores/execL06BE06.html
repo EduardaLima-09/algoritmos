@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 06B - Exercicio 06</title>
+</head>
+<body>
+    <h4>Lista Viva de Filmes Favoritos</h4>
+    informe os nomes dos filmes que mais gosta: <input id="iptFilmes"> <br> 
+    <button onclick="cadastrar()">Cadastrar</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+
+    var ax_Filmes = [];
+
+    function cadastrar() {
+        ax_Filmes.push(iptFilmes.value);
+        iptFilmes.value = '';
+
+        divMsg.innerHTML = `Filmes: <br>`;
+        divMsg.innerHTML += `${ax_Filmes} <br>`;
+    }
+</script>
+</html>

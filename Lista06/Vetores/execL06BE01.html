@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 06B - Exercicio 01</title>
+</head>
+
+<body>
+    <h4>Caça às Frutas: Descubra se está na Lista</h4>
+    Nome da fruta: <input id="iptFruta"> <br>
+    <button onclick="pesquisar()">Pesquisar</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function pesquisar() {
+        var ax_Feira = ['Banana', 'Maçã', 'Mexerica', 'Morango', 'Limão', 'Uva']
+
+        if (ax_Feira.indexOf(iptFruta.value) >= 0 ) {
+            divMsg.innerHTML = `A fruta ${iptFruta.value} existe na lista`
+        } else {
+            divMsg.innerHTML = `Não existe a fruta ${iptFruta.value} na lista`
+        }
+    }
+</script>
+</html>

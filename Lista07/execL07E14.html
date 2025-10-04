@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 14</title>
+</head>
+<body>
+    <h4>Dividibilidade</h4>
+    Intervalo inicial de números: <input id="iptNumeroInicial"> <br>
+    Intervalo final de números: <input id="iptNumeroFinal"> <br>
+    número para teste de divisibilidade (entre 3 e 13): <input id="iptDivisivel"> <br>
+    <button onclick="dividir()">Divisível</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function dividir() {
+        var intervaloInicial = Number(iptNumeroInicial.value);
+        var intervaloFinal = Number(iptNumeroFinal.value);
+        var dividendo = Number(iptDivisivel.value);
+        var contador = intervaloInicial;
+
+        if (dividendo < 3 && dividendo <= 13) {
+            alert('Deve iniciar com 3 e terminar com 13')
+        } else {
+            while (contador <= intervaloFinal) {
+                if (contador % dividendo != 0) {
+                    divMsg.innerHTML += `<br> ${contador}`
+                }
+                contador++
+            }
+        }
+    }
+</script>
+</html>

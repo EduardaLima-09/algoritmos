@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 10</title>
+</head>
+
+<body>
+    <h4>Pares no Intervalo</h4>
+    Intervalo inicial de valores númericos: <input id="iptInicial"> <br>
+    Intervalo final de valores númericos: <input id="iptFinal"> <br>
+    <button onclick="pares()">S2 Pares</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function pares() {
+        var intervaloInicial = Number(iptInicial.value);
+        var intervaloFinal = Number(iptFinal.value);
+        var contador = intervaloInicial;
+
+        if (intervaloFinal < intervaloInicial) {
+            alert('Intervalo final não pode ser menor que intervalo inicial')
+        } else {
+            while (contador <= intervaloFinal) {
+                if (contador % 2 == 0) {
+                    divMsg.innerHTML += `<br> ${contador}`
+                }
+                contador++
+            }
+        }
+    }
+</script>
+
+</html>

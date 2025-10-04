@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07B - Exercicio 15</title>
+</head>
+<body>
+    <h4>Treino de Musculação</h4>
+    De quantos em quantos dias você faz musculação?: <input id="iptDias"> <br>
+    <button onclick="exibir()">Exibir rotina mensal</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+
+    var dia = 1;
+
+    function exibir() {
+        var dias = Number(iptDias.value);
+
+        if (dias == "" || dias < 1) {
+                alert("Por favor, informe um número válido (mínimo 1)!");
+        }
+
+        while (dia <= 30) {
+            if ((dia - 1) % dias == 0) {
+                    divMsg.innerHTML += `Dia ${dia} - Musculação 💪<br>`;
+            } else {
+                    divMsg.innerHTML += `Dia ${dia} - Comer, dormir etc 😴<br>`;
+            }
+            dia++;
+        }
+    }
+</script>
+</html>

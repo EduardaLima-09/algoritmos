@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07B - Exercicio 16</title>
+</head>
+
+<body>
+    <h4>Um elefante, incomoda muita gente...</h4>
+    Quantidade elefantes: <input id="iptElefante"> <br>
+    <button onclick="atazanar()">Atazanar a médium</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+
+    var contador = 2;
+
+    function atazanar() {
+        var elefante = Number(iptElefante.value);
+
+        while (contador <= elefante) {
+            divMsg.innerHTML += `1 elefante incomoda muita gente!<br>`
+
+            var vezes = 1;
+            var frase = '';
+
+            while (vezes <= contador) {
+                frase += `incomodam, `
+                vezes++
+            }
+
+            divMsg.innerHTML += `${contador} elefantes, ${frase}muito mais! <br>`
+            contador++
+        }
+
+    }
+</script>
+
+</html>

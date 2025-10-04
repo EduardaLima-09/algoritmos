@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 06</title>
+</head>
+<body>
+    <h4>Filtro de Números Cabalísticos</h4>
+    <button onclick="filtrar()">Filtrar números Cabalísticos</button> <br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function filtrar() {
+        var contador = 0;
+
+        while (contador < 30) {
+            contador++
+            if (contador !== 3 && contador !== 4 && contador !== 7 && contador !== 10 && contador !== 12) {
+                divMsg.innerHTML += `<br> ${contador}`
+            } 
+        }
+    }
+</script>
+</html>

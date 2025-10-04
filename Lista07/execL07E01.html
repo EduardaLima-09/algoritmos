@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07 - Exercicio 01</title>
+</head>
+<body>
+    <h4>Contagem Simples</h4>
+    <button onclick="contar()">Contar</button>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function contar() {
+        var contador = 0;
+        
+        while (contador < 15) {
+            contador++
+            divMsg.innerHTML += `<br> ${contador}` 
+        }
+    }
+</script>
+</html>

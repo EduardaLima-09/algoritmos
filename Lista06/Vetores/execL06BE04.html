@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 06B - Exercicio 04</title>
+</head>
+<body>
+    <h4>Top Filmes Favoritos: Do Mais Amado ao Menos</h4>
+    Informe o nome dos filmes que mais gosta, começando pelo favorito: 
+    <input id="iptFilmes"> <br>
+    <button onclick="cadastrar()">Cadastrar filme</button>
+    <button onclick="ver()">Ver Favoritos</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+
+    var ax_ListaFilmes = [];
+
+    function cadastrar() {
+        ax_ListaFilmes.push(iptFilmes.value);
+        iptFilmes.value = '';
+    }
+
+    function ver() {
+        divMsg.innerHTML = `Total: ${ax_ListaFilmes.length}<br>
+        O filme que mais gosta ${ax_ListaFilmes[0]}<br>
+        E desses, o que menos gosta é ${ax_ListaFilmes[ax_ListaFilmes.length-1]}`
+    }
+</script>
+</html>

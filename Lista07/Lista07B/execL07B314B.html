@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 07B - Exercicio 14B</title>
+</head>
+<body>
+    <h4>É tri/penta!</h4>
+    Intervalo inicial: <input id="iptInicial"> <br>
+    Intervalo final: <input id="iptFinal"> <br>
+    <button onclick="verificar()">Curto 3 e 5!</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function verificar() {
+        var inicial = Number(iptInicial.value);
+        var final = Number(iptFinal.value);
+
+        if (inicial >= final) {
+            alert('O intervalo final deve ser maior que o inicial!')
+        }
+
+        var numero = inicial;
+
+        while (numero <= final) {
+            if (numero % 3 == 0 && numero % 5 == 0) {
+                divMsg.innerHTML += `É TRI! É PENTA! <br>`
+            } else if (numero % 3 == 0) {
+                divMsg.innerHTML += `É TRI! <br>`
+            } else if (numero % 5 == 0) {
+                divMsg.innerHTML += `É PENTA! <br>`
+            } else {
+                divMsg.innerHTML = `Número ${numero} `
+            }
+
+            numero++
+        }
+
+    }
+</script>
+</html>
