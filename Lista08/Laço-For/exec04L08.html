@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 04</title>
+</head>
+<body>
+    <h4>Café com Leite na Medida Certa</h4>
+    Quantas xícaras de café com leite: <input id="iptCafeComLeite"> <br>
+    <button onclick="ver()">Ver a quantidade</button> <br>
+    <div id="div_resultado"></div>
+</body>
+<script>
+    function ver() {
+        var cafe_com_leite = Number(iptCafeComLeite.value);
+
+        if (cafe_com_leite == '' || cafe_com_leite < 0) {
+            div_resultado.innerHTML = `Preencha o campo`;
+        } else {
+            for (let index = 1; index <= cafe_com_leite; index++) {
+               div_resultado.innerHTML += `<br> ${index} <img src="imagens/leiteempo.png" width="5%"> - <img src="imagens/colhercafe.png" width="5%"> - <img src="imagens/colhercafe.png" width="5%">`; 
+            }
+        }
+    }
+</script>
+</html>

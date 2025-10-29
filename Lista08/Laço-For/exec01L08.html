@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 01</title>
+</head>
+
+<body>
+    <h4>Carona Compartilhada</h4>
+    Quantas pessoas vão entrar no carro: <input id="iptPessoas"> <br>
+    <button onclick="carona()">#Partiu Carona</button>
+    <div id="div_resultado"></div>
+</body>
+<script>
+
+    var mensagem = '';
+
+    function carona() {
+        var pessoas = Number(iptPessoas.value);
+
+        if (pessoas == '' || pessoas < 0) {
+            mensagem += `Preencha o campo corretamente`;
+        } else {
+            for (let index = 1; index <= pessoas; index++) {
+                if (index == 1) {
+                    mensagem += `<br> Entrou o ${index}° passageiro (que é o(a) motorista)`;
+                } else if (index <= 5) {
+                    mensagem += `<br> Entrou o ${index}° passageiro`;
+                } else if (index >= 6) {
+                    mensagem += `<br> ${index}° passageiro terá que esperar!`;
+                }
+                div_resultado.innerHTML = mensagem;
+            }
+
+        }
+    }
+</script>
+
+</html>

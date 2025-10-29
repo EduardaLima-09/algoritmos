@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Like prova - sprint 02</title>
+</head>
+
+<body>
+    <h4>Luffy contra marinheiros em Impel Down</h4>
+    Digite a quantidade de marinheiros: <input id="iptQtdeMarinheiros"> <br>
+    Digite a quantidade de carne que o luffy tem de reserva: <input id="iptQtdeCarneReserva"> <br>
+    Digite a quantidade de batalhas: <input id="iptQtdeBatalhas"> <br><br>
+    <button onclick="batalhar()">Ver Batalhas</button> <br><br>
+    <div id="divMensagem"></div>
+</body>
+
+<script>
+    function batalhar() {
+        var qtdeMarinheiros = Number(iptQtdeMarinheiros.value);
+        var qtdeCarneReserva = Number(iptQtdeCarneReserva.value);
+        var qtdeBatalhas = Number(iptQtdeBatalhas.value);
+
+        var contadorBatalhas = 1;
+
+        while (contadorBatalhas <= qtdeBatalhas) {
+
+            var pontos_energia_inicial = 100;
+            var marinheiros_derrotados = 0;
+            var carnes_consumidas = 0;
+            var carne_restante = qtdeCarneReserva;
+
+            // Novo contador para marinheiros
+            var contadorMarinheiros = 0;
+
+            while (contadorMarinheiros < qtdeMarinheiros) {
+                if (pontos_energia_inicial >= 5) {
+                    pontos_energia_inicial -= 5;
+                    marinheiros_derrotados++;
+                    contadorMarinheiros++;
+                } else if (carne_restante > 0) {
+                    carne_restante--;
+                    carnes_consumidas++;
+                    pontos_energia_inicial = 100;
+                } else {
+                    break;
+                }
+            }
+
+            divMensagem.innerHTML += `<hr>`;
+            divMensagem.innerHTML += `<b>${contadorBatalhas}ª Batalha:</b><br>`;
+            divMensagem.innerHTML += `Quantidade de marinheiros: ${qtdeMarinheiros}<br>`;
+            divMensagem.innerHTML += `Quantidade de carne: ${qtdeCarneReserva}<br>`;
+
+            if (marinheiros_derrotados == qtdeMarinheiros) {
+                divMensagem.innerHTML += `Resultado: Luffy saiu vitorioso, comeu ${carnes_consumidas} carne(s),
+             derrotou ${marinheiros_derrotados} marinheiro(s) e sobrou ${pontos_energia_inicial} pontos de energia<br>`;
+            } else {
+                divMensagem.innerHTML += `Resultado: Luffy foi derrotado! Comeu ${carnes_consumidas} carne(s),
+             derrotou ${marinheiros_derrotados} marinheiro(s) e acabou com ${pontos_energia_inicial} pontos de energia<br>`;
+            }
+
+            contadorBatalhas++;
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 08</title>
+</head>
+
+<body>
+    <h4>FizzBuzz</h4>
+    Digite um número: <input id="iptNumero"> <br>
+    <button onclick="ver()">Ver resultado</button>
+    <div id="div_resultado"></div>
+</body>
+<script>
+    function ver() {
+        var numero = Number(iptNumero.value);
+        var mensagem = "";
+
+        if (numero == '' || numero < 0) {
+            div_resultado.innerHTML = `Preencha corretamente os dados, ou número deve ser maior que 0`;
+        } else {
+            for (let index = 1; index <= numero; index++) {
+                if (index % 3 == 0) {
+                    mensagem += `<br> Fizz`;
+                } else if (index % 5 == 0) {
+                    mensagem += `<br> Buzz`;
+                } else if (index % 3 == 0 && index % 5 == 0) {
+                    mensagem += `<br> FizzBuzz`;
+                }
+            }
+            div_resultado.innerHTML = `<br> ${mensagem}`;
+        }
+    }
+</script>
+
+</html>

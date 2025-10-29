@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 06</title>
+</head>
+
+<body>
+    <h4>Acompanhando a Poupança</h4>
+    Quantos depósitos você fez no banco: <input id="iptDeposito"> <br>
+    Valor de cada depósito: <input id="iptValorDeposito"> <br>
+    <button onclick="depositar()">Acompanhar grana</button> <br><br>
+    <div id="div_extrato"></div>
+</body>
+<script>
+    function depositar() {
+        var deposito = Number(iptDeposito.value);
+        var valor = Number(iptValorDeposito.value);
+        var total = 0;
+
+        if ((deposito == '' || deposito < 0) || valor < 0) {
+            div_extrato.innerHTML = `Preencha os dados corretamente`;
+        } else {
+            for (let index = 1; index <= deposito; index++) {
+                if (index % 3 == 0) {
+                    total = (valor + total) * 1.01;
+                    div_extrato.innerHTML += `<br> ${index}° Mês: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+                } else {
+                    total+=valor;
+                    div_extrato.innerHTML += `<br> ${index}° Mês: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+                }
+            }
+            div_extrato.innerHTML += `<br> Total guardado ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+        }
+    }
+</script>
+
+</html>

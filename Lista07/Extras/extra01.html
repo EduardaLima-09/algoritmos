@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Extra 07</title>
+</head>
+
+<body>
+    <h4>Encontrar os não divisíveis</h4>
+    Inicio do intervalo de valores númericos: <input id="iptIntervaloInicial"> <br>
+    Fim do intervalo de valores númericos: <input id="iptIntervaloFinal"> <br>
+    Número para teste de divisibilidade (entre 3 e 13): <input id="iptNumeroTeste"> <br>
+    <button onclick="dividir()">Divisível</button> <br><br>
+    <div id="divMsg"></div>
+</body>
+<script>
+    function dividir() {
+        var intervaloInicial = Number(iptIntervaloInicial.value);
+        var intervaloFinal = Number(iptIntervaloFinal.value);
+        var numeroTeste = Number(iptNumeroTeste.value);
+
+        if (intervaloInicial < 0 && intervaloFinal > intervaloInicial) {
+            alert('Intervalo inicial deve ser maior que 0 e intervalo final não pode ser maior que o inicial');
+        } else if (numeroTeste < 3 || numeroTeste > 13) {
+            alert('Número de divisibilidade deve estar entre 3 e 13!')
+        } else {
+            var contador = intervaloInicial;
+
+            while (contador < intervaloFinal) {
+
+                if (contador % numeroTeste != 0) {
+                    divMsg.innerHTML += `${contador} <br>`
+                }
+                contador++
+            }
+        }
+    }
+</script>
+
+</html>

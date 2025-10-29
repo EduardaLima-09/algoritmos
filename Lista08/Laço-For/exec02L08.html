@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 02</title>
+</head>
+
+<body>
+    <h4>Capacidade Flexível </h4>
+    Quantas pessoas vão entrar no carro: <input id="iptPessoas"> <br>
+    Qual a capacidade de pessoas que cabe: <input id="iptCapacidade"> <br>
+    <button onclick="carona()">#Partiu Carona</button>
+    <div id="div_resultado"></div>
+</body>
+<script>
+
+    var mensagem = '';
+
+    function carona() {
+        var pessoas = Number(iptPessoas.value);
+        var capacidade =  Number(iptCapacidade.value);
+
+        if (pessoas == '' || pessoas < 0) {
+            mensagem += `Preencha o campo corretamente`;
+        } else {
+            for (let index = 1; index <= pessoas; index++) {
+                if (index == 1) {
+                    mensagem += `<br> Entrou o ${index}° passageiro (que é o(a) motorista)`;
+                } else if (index <= capacidade) {
+                    mensagem += `<br> Entrou o ${index}° passageiro`;
+                } else if (index > capacidade) {
+                    mensagem += `<br> ${index}° passageiro terá que esperar!`;
+                }
+                div_resultado.innerHTML = mensagem;
+            }
+
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 03</title>
+</head>
+<body>
+    <h4>Contador de Coca-Colas </h4>
+    Informe quantas "Coca-Cola" você já bebeu na vida: <input id="iptCocaCola"> <br>
+    <button onclick="ver()">Ver a quantidade</button> <br><br>
+    <div id="div_resultado"></div>
+</body>
+<script>
+
+    var mensagem = '';
+
+    function ver() {
+        var coca_cola = Number(iptCocaCola.value);
+        iptCocaCola.value = "";
+        mensagem = "";
+
+        if (coca_cola == '' || coca_cola < 0) {
+            mensagem += `Preencha corretamente`;
+        } else {
+            for (let index = 1; index <= coca_cola; index++) {
+                mensagem += `${index} - <img src="imagens/coca.png" width="5%">`
+            }
+            div_resultado.innerHTML = mensagem;
+        }
+    }
+</script>
+</html>

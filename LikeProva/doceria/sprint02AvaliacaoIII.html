@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dori Valdossin - Doces Goumerts </title>
+</head>
+
+<style>
+    body {
+        background-color: #FFC0CB;
+    }
+</style>
+
+<body>
+    <h4>Doceria Gourmet</h4>
+    Quantidade de cada doce a ser vendidido: <br>
+
+    Macarons: <input id="iptQtdeMacarons"> <br>
+    Brigadeiros: <input id="iptQtdeBrigadeiros"> <br>
+    Cupcakes: <input id="iptQtdeCupcakes"> <br>
+    Cheesecakes: <input id="iptQtdeCheesecakes"> <br>
+
+    <br>
+    <hr>
+
+    Preço unitário de cada doce: <br>
+
+    Macarons: <input id="iptPrecoMacarons"> <br>
+    Brigadeiros: <input id="iptPrecoBrigadeiros"> <br>
+    Cupcakes: <input id="iptPrecoCupcakes"> <br>
+    Cheesecakes: <input id="iptPrecoCheesecakes"> <br><br>
+
+    <button onclick="verificar()">Verificar Vendas</button> <br><br>
+    <div id="divExtrato"></div>
+</body>
+<script>
+    function verificar() {
+
+        // Quantidade de cada doce
+        var qtde_macarons = Number(iptQtdeMacarons.value);
+        var qtde_brigadeiros = Number(iptQtdeBrigadeiros.value);
+        var qtde_cupcakes = Number(iptQtdeCupcakes.value);
+        var qtde_cheesecakes = Number(iptQtdeCheesecakes.value);
+
+        // Preço unitário de cada doce
+        var preco_macarons = Number(iptPrecoMacarons.value);
+        var preco_brigadeiros = Number(iptPrecoBrigadeiros.value);
+        var preco_cupcakes = Number(iptPrecoCupcakes.value);
+        var preco_cheesecakes = Number(iptPrecoCheesecakes.value);
+
+        // Validando que não pode ser nagativo
+        if (qtde_macarons < 0 || qtde_brigadeiros < 0 || qtde_cupcakes < 0 || qtde_cheesecakes < 0 ||
+            preco_macarons < 0 || preco_brigadeiros < 0 || preco_cupcakes < 0 || preco_cheesecakes < 0) {
+            alert('Erro: Qunatidades e preços não podem ser negativos!');
+            return;
+        }
+
+        var total = (qtde_macarons * preco_macarons) + (qtde_brigadeiros * preco_brigadeiros) + (qtde_cupcakes * preco_cupcakes) + (qtde_cheesecakes * preco_cheesecakes);
+
+        divExtrato.innerHTML = `<hr><br>Extrato:<br>`;
+        var vendaContador = 1;
+
+        var vezes = 0;
+
+        while (vezes < qtde_macarons) {
+            divExtrato.innerHTML += `Venda ${vendaContador}°
+            <img src="images/Macarons.png" width="100px"> 
+            - R$ ${preco_macarons.toFixed(2)}<br>`;
+            vendaContador++;
+            vezes++;
+        }
+
+        var vezes = 0;
+
+        while (vezes < qtde_brigadeiros) {
+            divExtrato.innerHTML += `Venda ${vendaContador}°
+            <img src="images/Brigadeiros.png" width="100px"> 
+            - R$ ${preco_brigadeiros.toFixed(2)}<br>`;
+            vendaContador++;
+            vezes++;
+        }
+
+        var vezes = 0;
+
+        while (vezes < qtde_cupcakes) {
+            divExtrato.innerHTML += `Venda ${vendaContador}° 
+            <img src="images/Cupcakes.png" width="100px"> 
+            - R$ ${preco_cupcakes.toFixed(2)}<br>`;
+            vendaContador++;
+            vezes++;
+        }
+
+        var vezes = 0;
+
+        while (vezes < qtde_cheesecakes) {
+            divExtrato.innerHTML += `Venda ${vendaContador}°
+            <img src="images/Cheesecakes.png" width="100px"> 
+            - R$ ${preco_cheesecakes.toFixed(2)}<br>`;
+            vendaContador++;
+            vezes++;
+        }
+
+
+        divExtrato.innerHTML += `<br>Com a quantidade de 
+        ${qtde_macarons} Macarons, 
+        ${qtde_brigadeiros} Brigadeiros, 
+        ${qtde_cupcakes} Cupcakes 
+        e ${qtde_cheesecakes} Cheesecakes, 
+        a venda totalizará R$${total.toFixed(2)}`;
+
+    }
+</script>
+
+</html>

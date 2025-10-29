@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 08 - Exercicio 09</title>
+</head>
+
+<body>
+    <h4>Fases da Vida</h4>
+    Digite sua idade: <input id="iptIdade" onkeyup="ver()"> <br>
+    <div id="div_idade"></div>
+</body>
+<script>
+    function ver() {
+        var idade = Number(iptIdade.value);
+        var frase = "";
+
+        div_idade.innerHTML = "";
+
+        if (idade == '' || idade < 0) {
+            div_idade.innerHTML = `Insira uma idade válida!`;
+        } else {
+            for (let index = 0; index <= idade; index++) {
+                if (index <= 4) {
+                    frase = `Primeira Infância`;
+                } else if (index <= 6) {
+                    frase = `Pré-escolar`;
+                } else if (index <= 10) {
+                    frase = `Segunda Infância`;
+                } else if (index <= 18) {
+                    frase = `Adolescência`;
+                } else if (index <= 50) {
+                    frase = `Adulto`;
+                } else if (index <= 100) {
+                    frase = `Melhor idade`;
+                } else if (index > 100) {
+                    frase = `Matusalém`;
+                }
+                div_idade.innerHTML += `<br> ${index} anos ${frase} `
+            }
+
+        }
+    }
+</script>
+
+</html>
