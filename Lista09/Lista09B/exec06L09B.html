@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 07</title>
+</head>
+
+<body>
+    <h4>Registro de Números com Histórico, Maior e Menor Valor</h4>
+    Digite um número qualquer: <input id="iptNumero"> <br>
+    <button onclick="analisar()">Analisar historico</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_registro = [];
+
+    function analisar() {
+        var maior = vt_registro[0];
+        var menor = vt_registro[0];
+        var registrar = Number(iptNumero.value);
+
+        vt_registro.push(registrar);
+        iptNumero.value = '';
+        div_msg.innerHTML = '';
+
+
+        for (var index = 0; index < vt_registro.length; index++) {
+            var numeroAtual = vt_registro[index];
+
+            if (numeroAtual > maior) {
+                maior = numeroAtual;
+            }
+
+            if (numeroAtual < menor) {
+                menor = numeroAtual;
+            }
+
+
+            div_msg.innerHTML = `A ${index + 1}ª Número é: ${vt_registro[index]}<br>`;
+            div_msg.innerHTML += `Maior: ${maior} <br>`;
+            div_msg.innerHTML += `Menor: ${menor} <br>`;
+        }
+
+
+
+    }
+</script>
+
+</html>

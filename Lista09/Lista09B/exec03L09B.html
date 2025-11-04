@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 04</title>
+</head>
+
+<body>
+    <h4>Controle de Estoque de Produtos com Cálculo de Valor Total</h4>
+    Preço do produto: <input id="iptPrecoProduto"> <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="atualizar()">Atualizar Estoque</button> <br><br>
+    <div id="div_atualizar"></div>
+</body>
+<script>
+
+    var vt_guardar_preco = [];
+
+    function cadastrar() {
+        var preco = Number(iptPrecoProduto.value);
+        vt_guardar_preco.push(preco);
+        alert('Preço cadastrado!');
+        iptPrecoProduto.value = '';
+    }
+
+    function atualizar() {
+        var estoqueTotal = 0;
+        var qtde = vt_guardar_preco.length;
+
+        for (var index = qtde - 1; index >= 0; index--) {
+            estoqueTotal += vt_guardar_preco[index];
+        }
+
+        div_atualizar.innerHTML += `<br>Você tem <b>${qtde}</b> produtos cadastrados em estoque.<br>`;
+        div_atualizar.innerHTML += `Seu estoque vale <b>R$ ${estoqueTotal.toFixed(2)}</b>.`;
+    }
+</script>
+
+</html>

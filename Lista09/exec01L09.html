@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09 - Exercicio 01</title>
+</head>
+
+<body>
+    <h4>Caça às Frutas: Descubra se está na Lista</h4>
+    Digite o nome de uma fruta: <input id="iptNomeFruta"> <br>
+    <button onclick="pesquisar()">Pesquisar</button> <br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_frutas = ['Uva', 'Banana', 'Morango', 'Pitaya'];
+
+    function pesquisar() {
+        var nomeFruta = iptNomeFruta.value;
+
+        if (vt_frutas.indexOf(nomeFruta) != -1) {
+            div_msg.innerHTML = `A fruta ${nomeFruta} existe na lista`;
+        } else {
+            div_msg.innerHTML = `A fruta ${nomeFruta} não existe na lista`;
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 05</title>
+</head>
+
+<body>
+    <h4>Cadastro de Filhos sem Repetição e Estimativa de Custo Escolar</h4>
+    Nome de um de seus filhos: <input id="iptNomeFilho"> <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="atualizar()">Atualizar Família</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+ 
+    vt_cadastro_nome = [];
+
+    function cadastrar() {
+        var nome_cadastrado = iptNomeFilho.value;
+
+        if (nome_cadastrado == '') {
+            alert('Por favor, digite um nome!');
+        }
+
+        if (vt_cadastro_nome.includes(nome_cadastrado)) {
+            alert('Não pode mais de 1 filho com o mesmo nome!');
+        } else {
+            vt_cadastro_nome.push(nome_cadastrado);
+            iptNomeFilho.value = '';
+        }
+
+    }
+
+    function atualizar() {
+        var escola_particular = vt_cadastro_nome.length * 3000;
+        var escola_publica = vt_cadastro_nome.length * 1500;
+
+        div_msg.innerHTML += `Você tem ${vt_cadastro_nome.length + 1} filho(s) <br>`;
+        div_msg.innerHTML += `Seu custo mensal será aproximadamente R$${escola_particular.toFixed(2)} 
+        <br> se colocá-los em escola particular ou R$${escola_publica.toFixed(2)} se eles estudarem em escola pública`;
+
+    }
+</script>
+
+</html>

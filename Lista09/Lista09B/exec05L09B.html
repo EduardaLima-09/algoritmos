@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 06</title>
+</head>
+
+<body>
+    <h4>Controle de Campanha de Time de Futebol com Análise de Aproveitamento</h4>
+    <select id="slc_op">
+        <option value="0">Selecione...</option>
+        <option value="1">Vitória</option>
+        <option value="2">Empate</option>
+        <option value="3">Derrota</option>
+    </select>
+    <br>
+    <button onclick="registrar()">Registrar jogo</button>
+    <br>
+    Indique qual jogo deseja saber o resultado: <input id="iptIndicar"> <br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_registrar = [];
+
+    function registrar() {
+        var selecao = Number(slc_op.value);
+        var indicar = Number(iptIndicar.value);
+
+
+        var soma = 0;
+        var vitoria = 0;
+        var empate = 0;
+        var derrota = 0;
+        var totalPontos = 0;
+        vt_registrar.push(selecao);
+
+        if (selecao == '' || selecao == 0) {
+            div_msg.innerHTML = `Preencha corretamente os dados!`;
+        } else {
+            for (var index = 0; index < vt_registrar.length; index++) {
+                if (vt_registrar[index] == 1) {
+                    vitoria += 3;
+                }
+                if (vt_registrar[index] == 2) {
+                    empate += 1;
+                }
+                if (vt_registrar[index] == 3) {
+                    derrota += 0;
+                }
+                totalPontos = vitoria + empate + derrota;
+            }
+
+            var aproveitamento = (vitoria / totalPontos) * 100;
+
+            
+            div_msg.innerHTML = `<br>O time teve: ${vitoria} vitórias, ${empate} empates, ${derrota} derrotas <br>  
+            Pontuação total: ${totalPontos} pontos <br>
+            Aproveitamento: ${aproveitamento.toFixed(1)}%`;
+            
+            if (vt_registrar[indicar] == 1) {
+                div_msg.innerHTML += `<br> No ${indicar}º jogo, o time Ganhou`;
+            } else if (vt_registrar[indicar] == 2) {
+                div_msg.innerHTML += `<br> No ${indicar}º jogo, o time Empatou`;
+            } else if (vt_registrar[indicar] == 3) {
+                div_msg.innerHTML += ` No ${indicar}º jogo, o time Perdeu`;
+            } else {
+                div_msg.innerHTML += `<br> Não foi cadastrado um ${indicar}º jogo  `;
+            }
+        }
+        
+        div_msg.innerHTML += `<br><br>${vt_registrar}`;
+
+
+    }
+</script>
+
+</html>

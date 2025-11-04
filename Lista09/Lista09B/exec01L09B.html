@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B- Exercicio 02</title>
+</head>
+
+<body>
+    <h4>Cadastro de Projetos e Classificação de Experiência Profissional</h4>
+    Nome do projeto: <input id="iptNomeProjeto"> <br><br>
+    <button onclick="registrar()">Registrar projeto</button>
+    <button onclick="mostrar()">Mostrar Projetos</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_projetos = [];
+
+    function registrar() {
+        var nome_projeto = iptNomeProjeto.value;
+        alert(`O projeto ${iptNomeProjeto.value} foi cadastrado com sucesso`)
+        iptNomeProjeto.value = '';
+
+        vt_projetos.push(nome_projeto);
+
+        var profissional = "";
+
+        if (vt_projetos.length > 0 || vt_projetos < 4) {
+            profissional = `Júnior`;
+        }
+
+        if (vt_projetos.length > 4 || vt_projetos <= 12) {
+            profissional = `Pleno`;
+        }
+
+        if (vt_projetos.length > 13) {
+            profissional = `Sênior`;
+        }
+
+        div_msg.innerHTML = `Você já fez ${vt_projetos.length} projetos. Por isso você é um profissional ${profissional}`;
+
+    }
+
+    function mostrar() {
+
+        div_msg.innerHTML += `<br><br>Projetos:<br><br>`
+        for (var index = vt_projetos.length - 1; index >= 0; index--) {
+            div_msg.innerHTML += `A ${index + 1}ª ocorrência é: ${vt_projetos[index]}<br>`;
+        }
+    }
+</script>
+
+</html>

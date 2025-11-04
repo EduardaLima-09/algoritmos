@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confeitaria | Controle de qualidade</title>
+</head>
+
+<body>
+    <h4>Controle de Produção de Bolos na Confeitaria Doce Sabor</h4>
+    Nome do bolo produzido: <input id="iptNomeBolo"> <br>
+    Quantidade total de bolos produzidos: <input id="iptTotalBolos"> <br>
+    Quantidade de bolos com defeito: <input id="iptBolosComDefeito"> <br>
+    Peso total de farinha utilizada: <input id="iptPesoFarinha"> <br>
+    Tempo total gasto na produção: <input id="iptTempoTotal"> <br><br>
+    <button onclick="analisar()">Analisar Produção</button> <br><br>
+    <hr>
+    <div id="div_producao"></div>
+</body>
+<script>
+
+    var mensagem_erro = "";
+    var mensagem_percentual = "";
+    var mensagem_eficiencia = "";
+
+    function analisar() {
+        var nome = iptNomeBolo.value;
+        var qtdeTotalBolo = Number(iptTotalBolos.value);
+        var qtdeBoloComDefeito = Number(iptBolosComDefeito.value);
+        var pesoFarinha = Number(iptPesoFarinha.value);
+        var tempoTotal = Number(iptTempoTotal.value);
+
+        if (nome == '') {
+            mensagem_erro += `<br><b> O nome do bolo deve estar preenchido`;
+        }
+        if (qtdeTotalBolo < 5 || qtdeTotalBolo == '') {
+            mensagem_erro += `<br><b> A quantidade total de bolos produzidos deve ser no mínimo 5`;
+        }
+        if (qtdeBoloComDefeito == qtdeTotalBolo || qtdeBoloComDefeito > qtdeTotalBolo) {
+            mensagem_erro += `<br><b> A quantidade máxima de bolos defeituosos deve ser igual ou menor ao total produzido`;
+        }
+        if (pesoFarinha < 0 || pesoFarinha == '') {
+            mensagem_erro += `<br><b> O peso da farinha deve ser maior que 0`;
+        }
+        if (tempoTotal < 15 || tempoTotal == '') {
+            mensagem_erro += `<br><b> O tempo total gasto na produção deve ser maior que 15 minutos`;
+        }
+
+        if (mensagem_erro != '') {
+            div_producao.innerHTML = `Erro de preenchimento! Verifique as informações e confirme: <br> ${mensagem_erro}`;
+        } else {
+
+            div_producao.innerHTML = "";
+
+            var totalBolos_validos = qtdeTotalBolo - qtdeBoloComDefeito;
+            var percentual_eficiencia = (totalBolos_validos / qtdeTotalBolo) * 100;
+            var media_farinha = pesoFarinha / qtdeTotalBolo;
+            var total_farinha = media_farinha * qtdeBoloComDefeito;
+            var tempo_medio = tempoTotal / qtdeTotalBolo;
+
+            // Exibir o relatório com os resultados obtidos, contendo as informações abaixo: 
+
+            div_producao.innerHTML += `<i><b> ANÁLISE DA PRODUÇÃO <br><br>`;
+            div_producao.innerHTML += `Bolo: ${nome} <br>`;
+            div_producao.innerHTML += `Produzidos: ${qtdeTotalBolo} | Defeituosos: ${qtdeBoloComDefeito} <br>`;
+            div_producao.innerHTML += `Bolos Válidos: ${totalBolos_validos} | Eficiência: ${percentual_eficiencia}% <br>`;
+            div_producao.innerHTML += `Farinha Total: ${pesoFarinha} kg | Média de Farinha por Bolo: ${media_farinha} kg  <br>`;
+            div_producao.innerHTML += `Total de Farinha Desperdiçada: ${total_farinha} kg <br>`;
+            div_producao.innerHTML += `Tempo Total: ${tempoTotal} min | Tempo Médio por Bolo: ${tempo_medio} min <br><br>`;
+
+            if (percentual_eficiencia < 75) {
+                mensagem_percentual += `Produção abaixo do ideal – necessário revisar o processo de preparo.`;
+            }
+            if (percentual_eficiencia <= 90) {
+                mensagem_percentual += `Produção boa – rendimento dentro do esperado.`;
+            }
+            if (percentual_eficiencia > 90) {
+                mensagem_percentual += `Produção excelente – ótimo desempenho da equipe.`;
+            }
+            if (media_farinha < 0.8 && tempo_medio < 20) {
+                mensagem_percentual += `Processo otimizado – excelente aproveitamento de tempo e ingredientes.`;
+            }
+
+            div_producao.innerHTML += `${mensagem_percentual}`;
+
+            var qtdeDias = prompt("Quantidade de dias em que deseja projetar a eficiência da sua equipe:");
+
+            while (qtdeDias <= 0) {
+                if (qtdeDias <= 0) {
+                    qtdeDias = prompt("Projeção inválida! A quantidade de dias deve ser maior que 0!");
+                }
+            }
+
+            var eficienciaAtual = percentual_eficiencia;
+
+            for (let index = 1; index <= qtdeDias; index++) {
+
+                let incremento = 2;
+
+                if (index % 3 == 0) {
+                    incremento += 0.5;
+                    eficienciaAtual += incremento;
+                }
+
+                if (eficienciaAtual > 100) {
+                    eficienciaAtual = 100;
+                }
+
+                mensagem_eficiencia += `Dia ${index} - Eficiência estimada: ${eficienciaAtual.toFixed(1)}% <br>`;
+            }
+
+            div_producao.innerHTML += `<br><br><i><b> PROJEÇÃO DE EFICIÊNCIA: ${qtdeDias} dias <br><br>`;
+            div_producao.innerHTML += `${mensagem_eficiencia}`;
+
+        }
+
+    }
+</script>
+
+</html>

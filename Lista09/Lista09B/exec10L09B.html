@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 01</title>
+</head>
+
+<body>
+    Digite o nome do aluno: <input id="iptNomeAluno"> <br>
+    <button onclick="cadastrar()">Cadastrar</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+   var vt_cadastrar_nome = [];
+
+    function cadastrar() {
+        var nome_cadastrado = iptNomeAluno.value;
+        vt_cadastrar_nome.push(nome_cadastrado);
+        iptNomeAluno.value = '';
+        div_msg.innerHTML = '';
+        
+        for (var index = vt_cadastrar_nome.length-1; index >= 0; index--) {
+            div_msg.innerHTML += `<br> ${index+1} - ${vt_cadastrar_nome[index]} `;
+        }
+    }
+</script>
+
+</html>

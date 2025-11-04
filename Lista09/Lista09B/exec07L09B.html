@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 08</title>
+</head>
+
+<body>
+    <h4>Sistema de Cadastro de Produtos com Relatório de Preço de Venda</h4>
+    Nome do produto: <input id="iptNome"> <br>
+    Preço do produto: <input id="iptPreco"> <br><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="relatorio()">Relatório de estoque</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_nomeCadastrado = [];
+    var vt_precoCadastrado = [];
+
+    function cadastrar() {
+        var nome = iptNome.value;
+        var preco = Number(iptPreco.value);
+        vt_nomeCadastrado.push(nome);
+        vt_precoCadastrado.push(preco);
+
+        iptNome.value = '';
+        iptPreco.value = '';
+    }
+
+    function relatorio() {
+        if (vt_nomeCadastrado.length == 0) {
+            div_msg.innerHTML = "Nenhum produto cadastrado ainda.";
+        }
+
+        div_msg.innerHTML = '';
+        div_msg.innerHTML += `<br><br>Total de produtos:<br>`;
+
+        var somaCompra = 0;
+        var somaVenda = 0;
+        var preco_maior = vt_precoCadastrado[0];
+        var preco_menor = vt_precoCadastrado[0];
+        var nome_maior = vt_nomeCadastrado[0];
+        var nome_menor = vt_nomeCadastrado[0];
+
+        for (let index = 0; index < vt_nomeCadastrado.length; index++) {
+            let nome = vt_nomeCadastrado[index];
+            let precoCompra = vt_precoCadastrado[index];
+            let precoVenda = precoCompra * 1.25;
+
+            div_msg.innerHTML += `<b>Produto ${index + 1}:</b> ${nome}<br>
+                Preço de compra: R$${precoCompra.toFixed(2)}<br>
+                Vender por: R$${precoVenda.toFixed(2)}<br><br>`;
+
+            somaCompra += precoCompra;
+            somaVenda += precoVenda;
+
+            if (precoCompra > preco_maior) {
+                preco_maior = precoCompra;
+                nome_maior = nome;
+            }
+
+            if (precoCompra < preco_menor) {
+                preco_menor = precoCompra;
+                nome_menor = nome;
+            }
+
+            var mediaVenda = somaVenda / vt_nomeCadastrado.length;
+
+            div_msg.innerHTML = `
+                <b>Produto mais caro:</b> ${nome_maior} (R$${preco_maior.toFixed(2)})<br>
+                <b>Produto mais barato:</b> ${nome_menor} (R$${preco_menor.toFixed(2)})<br>
+                <b>Soma dos preços de compra:</b> R$${somaCompra.toFixed(2)}<br>
+                <b>Média de preço de venda:</b> R$${mediaVenda.toFixed(2)}<br>`;
+        }
+    }
+</script>
+
+</html>

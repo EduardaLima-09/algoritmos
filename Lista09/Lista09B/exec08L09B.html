@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 09B - Exercicio 09</title>
+</head>
+
+<body>
+    <h4>Sistema Avançado de Estoque com Análise de Produtos e Estatísticas</h4>
+    Nome do produto: <input id="iptNome"> <br>
+    Preço do produto: <input id="iptPreco"> <br><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="relatorio()">Relatório de estoque</button> <br><br>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_nomeCadastrado = [];
+    var vt_precoCadastrado = [];
+
+    function cadastrar() {
+        var nome = iptNome.value;
+        var preco = Number(iptPreco.value);
+        vt_nomeCadastrado.push(nome);
+        vt_precoCadastrado.push(preco);
+
+        iptNome.value = '';
+        iptPreco.value = '';
+    }
+
+    function relatorio() {
+        div_msg.innerHTML = '';
+        div_msg.innerHTML += `<br><br>Total de produtos:<br>`;
+
+        for (let index = 0; index < vt_nomeCadastrado.length; index++) {
+            let nome = vt_nomeCadastrado[index];
+            let preco = vt_precoCadastrado[index];
+            let desconto = preco * 1.25;
+
+            div_msg.innerHTML += `<br> Produto ${index + 1}: ${nome}`;
+            div_msg.innerHTML += `<br> Preço de compra: ${preco.toFixed(2)}.`;
+        }
+
+        var preco_menor = [0];
+        var preco_maior = [0];
+
+        for (var index = 0; index < vt_precoCadastrado.length; index++) {
+            var precoAtual = vt_precoCadastrado[index];
+
+            if (precoAtual > preco_maior) {
+                preco_maior = precoAtual;
+                
+            }
+
+            if (numeroAtual < preco_menor) {
+                preco_menor = numeroAtual;
+            }
+
+
+            div_msg.innerHTML += `A ${index + 1}ª Número é: ${vt_registro[index]}<br>`;
+            div_msg.innerHTML += `Maior: ${vt_registro[preco_maior]} <br>`;
+            div_msg.innerHTML += `Menor: ${vt_registro[preco_menor]} <br>`;
+        }
+
+    }
+</script>
+</html>
