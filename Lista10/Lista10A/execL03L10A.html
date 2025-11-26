@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 10A - Exercicio 03</title>
+</head>
+<body>
+    <button onclick="jogar()">Jogar dado</button> <br>
+    <div id="div_msg"></div>
+</body>
+<script>
+    function jogar() {
+        var ax_numero = (Math.random() * 19 + 1).toFixed(0);
+
+        div_msg.innerHTML = `<h1 style="background-color: black; color: white; text-align:center; width:100px; heigth:100px; font-size:30px;"> ${ax_numero}`;
+    }
+</script>
+</html>

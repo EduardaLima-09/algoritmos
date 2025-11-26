@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interestelar</title>
+</head>
+
+<body>
+    <h4>Interestrelar</h4>
+    Nome do astronauta: <input id="iptNomeAstronauta"> <br>
+    Nome do planeta da viagem: <input id="iptNomePlaneta"> <br>
+    Tempo relativo no planeta: <input id="iptTempoRelativo"> <br>
+    Quantidade de dias da viagem: <input id="iptQtdeDias"> <br>
+    Quantidade de horas da viagem: <input id="iptQtdeHoras"> <br>
+    Quantidade de minutos da viagem: <input id="iptQtdeMinutos"> <br><br>
+    <button onclick="registrar()">Registrar viagem</button>
+    <button onclick="relatorio()">Relátório de viagens</button> <br>
+    <div id="div_msg"></div>
+    <div id="div_erro"></div>
+</body>
+<script>
+
+    var vt_Dias = [];
+    var vt_Horas = [];
+    var vt_Minutos = [];
+    var vt_NomePlaneta = [];
+    var vt_TempoRelativo = [];
+    var vt_NomeAstronauta = [];
+
+    function registrar() {
+        var ax_nomeAstronauta = iptNomeAstronauta.value;
+        var ax_nomePlaneta = iptNomePlaneta.value;
+        var ax_TempoRelativo = Number(iptTempoRelativo.value);
+        var ax_Horas = Number(iptQtdeHoras.value);
+        var ax_Dias = Number(iptQtdeDias.value * 1440);
+        var ax_Minutos = Number(iptQtdeMinutos.value * 60);
+
+        if (ax_nomeAstronauta == '' || ax_nomePlaneta == ''
+            || ax_TempoRelativo == '' || ax_TempoRelativo < 0) {
+            div_erro.innerHTML = `Preencha os campos corretamente e informe um tempo de viagem válido!`;
+        } else {
+
+            vt_NomeAstronauta.push(ax_nomeAstronauta)
+            vt_NomePlaneta.push(ax_nomePlaneta)
+            vt_TempoRelativo.push(ax_TempoRelativo)
+            vt_Dias.push(ax_Dias)
+            vt_Horas.push(ax_Horas)
+            vt_Minutos.push(ax_Minutos);
+
+            alert('Campos cadastrados!');
+        }
+    }
+
+    function relatorio() {
+        var ax_nomeAstronauta = iptNomeAstronauta.value;
+        var ax_nomePlaneta = iptNomePlaneta.value;
+        var ax_TempoRelativo = Number(iptTempoRelativo.value);
+        var ax_Horas = Number(iptQtdeHoras.value * 60);
+        var ax_Dias = Number(iptQtdeDias.value * 1440);
+        var ax_Minutos = Number(iptQtdeMinutos.value);
+
+        var imagem = "";
+
+        for (var index = 1; index < vt_NomeAstronauta.length; index++) {
+
+            var tempoTotal = (vt_Dias[index] + vt_Horas[index]) * vt_TempoRelativo[index];
+            var anos = tempoTotal / 525600;
+
+            div_msg.innerHTML += `<br><b> Foram registradas ${index} viagens, detalhadas a seguir:`;
+            div_msg.innerHTML += `<br> Viagem ${index}`;
+            div_msg.innerHTML += `<br> Astronauta ${ax_nomeAstronauta} ficou fora por pelo menos ${anos} anos no tempo da Terra.
+            <br> A criança que nasceu quando ele saiu provavelmente está assim hoje:`;
+
+            if (anos < 13) {
+                div_msg.innerHTML += `img src="Barts/Bart13.png" width="50px"`;
+            }
+            if (anos > 13 && anos < 30) {
+                div_msg.innerHTML += `img src="Barts/Bart30.png" width="50px"`;
+            }
+            if (anos > 30 && anos < 65) {
+                div_msg.innerHTML += `img src="Barts/Bart65.png" width="50px"`;
+            }
+            if (anos > 65 && anos < 100) {
+                div_msg.innerHTML += `img src="Barts/Bart100.png" width="50px"`;
+            }
+            if (anos > 100) {
+                div_msg.innerHTML += `img src="Barts/Bart100+.png" width="50px"`;
+            }
+
+        }
+    }
+</script>
+
+</html>

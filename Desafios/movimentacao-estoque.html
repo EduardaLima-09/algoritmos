@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especificação Funcional de Movimentação de Estoque</title>
+</head>
+
+<body>
+    <h2>Movimentação do seu estoque</h2>
+    <hr><br>
+    Identificação do Produto: <input id="ipt_identificacao"> <br><br>
+    Quantidade: <input id="ipt_quantidade"> <br><br>
+    Categoria:
+    <select id="select_categoria">
+        <option value="0">Selecione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <br><br>
+    Preço Unitário: <input id="ipt_precoUnitario"> <br>
+    <br>
+    <hr>
+    <button onclick="compra()">Compra</button>
+    <button onclick="venda()">Venda</button>
+    <br>
+    <hr>
+    <button>Lista de Venda Promocional</button>
+    <button>Lista Geral</button>
+    <button>Lista por Categoria</button>
+    <button>Lista Produto</button>
+    <hr>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_identificacaoProduto = [];
+    var vt_quantidadeProduto = [];
+    var vt_categoriaProduto = [];
+    var vt_pme = [];
+    var vt_pmv = [];
+
+    function compra() {
+        var id = ipt_identificacao.value;
+        var qtde = Number(ipt_quantidade.value);
+        var categoria = Number(select_categoria.value);
+        var precoUnitario = Number(ipt_precoUnitario.value);
+
+        // Mensagem de erro
+        var mensagem_erro = "";
+        div_msg.innerHTML = '';
+
+        // Validações Gerais
+        if (id == '') {
+            mensagem_erro += `<b> A Identificação do Produto é obrigatória!`;
+        }
+        if (qtde == '' || qtde < 0 || qtde % 1 !== 0) {
+            mensagem_erro += `<br><b> A Quantidade deve ser um número inteiro positivo!`;
+        }
+        if (categoria == '' || categoria < 1 || categoria > 4) {
+            mensagem_erro += `<br><b> A Categoria deve ser um dos valores: 1, 2, 3 ou 4`;
+        }
+        if (precoUnitario < 0 || precoUnitario == '') {
+            mensagem_erro += `<br><b> O Preço Unitário deve ser um valor monetário positivo`;
+        } else {
+
+            // Operação Compra
+
+            let produto_existe = false;
+
+            for (var ind = 0; ind < vt_identificacaoProduto.length; ind++) {
+                if (vt_identificacaoProduto[ind] == id) {
+                    alert('Produto já está cadastrado!');
+                    produto_existe = true;
+
+                    if (vt_categoriaProduto[ind] != categoria) {
+                        alert(`A categoria informada ${categoria} é diferente da categoria cadastrada ${vt_categoriaProduto}
+                        para o produto ${vt_identificacaoProduto}. Não é possível realizar a compra`);
+                    } else {
+                        var PME = 0;
+                    }
+                }
+            }
+
+            if (produto_existe == false) {
+                // Guardando nos vetores
+                vt_identificacaoProduto.push(id);
+                vt_quantidadeProduto.push(qtde);
+                vt_categoriaProduto.push(categoria);
+                vt_pme.push(precoUnitario);
+
+                console.log('ID cadastrado!');
+                console.log('Quantidade cadastrada!');
+                console.log('Categoria cadastrada!');
+                console.log('Preço unitário cadastrado!');
+            }
+
+        }
+
+
+
+
+        // Mensagens
+        if (mensagem_erro !== '') {
+            div_msg.innerHTML = `${mensagem_erro}`;
+        }
+    }
+</script>
+
+</html>

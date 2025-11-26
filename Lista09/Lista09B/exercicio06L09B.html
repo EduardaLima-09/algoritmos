@@ -61,11 +61,11 @@
             Aproveitamento: ${aproveitamento.toFixed(1)}%`;
             
             if (vt_registrar[indicar] == 1) {
-                div_msg.innerHTML += `<br> No ${indicar}º jogo, o time Ganhou`;
+                div_msg.innerHTML += `<br> No ${indicar+1}º jogo, o time Ganhou`;
             } else if (vt_registrar[indicar] == 2) {
-                div_msg.innerHTML += `<br> No ${indicar}º jogo, o time Empatou`;
+                div_msg.innerHTML += `<br> No ${indicar+1}º jogo, o time Empatou`;
             } else if (vt_registrar[indicar] == 3) {
-                div_msg.innerHTML += ` No ${indicar}º jogo, o time Perdeu`;
+                div_msg.innerHTML += ` No ${indicar+1}º jogo, o time Perdeu`;
             } else {
                 div_msg.innerHTML += `<br> Não foi cadastrado um ${indicar}º jogo  `;
             }

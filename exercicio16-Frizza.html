@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Avançado de Estoque com Análise de Produtos e Estatísticas</title>
+</head>
+
+<body>
+    <h3>16.Sistema Avançado de Estoque com Análise de Produtos e Estatísticas</h3>
+    <h2>Estoque da loja</h2>
+    Entre com o nome do produto: <input id="ipt_produto"> <br>
+    Entre com o preço do produto: <input id="ipt_preco"> <br><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="listar()">Relatorio</button>
+    <hr>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    var vt_produto = [];
+    var vt_preco = [];
+    var ax_valor_total = 0;
+
+    function cadastrar() {
+        ax_preco = Number(ipt_preco.value);
+        if (ipt_produto.value == '' || ipt_preco.value == ''
+            || ax_preco <= 0) {
+            alert('Preencher corretamente');
+        } else {
+            vt_produto.push(ipt_produto.value);
+            vt_preco.push(ax_preco);
+            ax_valor_total += ax_preco;
+            ipt_produto.value = '';
+            ipt_preco.value = '';
+            alert('produto cadastrado com sucesso');
+        }
+    }
+
+    function listar() {
+
+        if (vt_preco.length == 0) {
+            alert('Favor cadastrar algum produto..')
+        } else {
+
+            var axNomeProdutoMaisCaro = vt_produto[0];
+            var axNomeProdutoMaisBarato = vt_produto[0];
+            var axValorProdutoMaisBarato = vt_preco[0];
+            var axValorProdutoMaisCaro = vt_preco[0];
+
+            div_msg.innerHTML = `Total de produtos cadastrados = ${vt_produto.length}`;
+            for (var index = 0; index < vt_produto.length; index++) {
+                div_msg.innerHTML = `Produto ${index + 1}° : ${vt_produto[index]} <br>
+                Preço de Compra: ${vt_preco[index]} Vender por ${vt_preco[index] * 1.25} <br>`;
+
+                if (vt_preco[index] > axValorProdutoMaisCaro) {
+                    axValorProdutoMaisCaro =  vt_preco[index];
+                    axNomeProdutoMaisCaro = vt_produto[index];
+                }
+            }
+        }
+    }
+</script>
+
+</html>

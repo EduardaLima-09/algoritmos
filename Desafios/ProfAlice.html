@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de notas</title>
+</head>
+
+<body>
+    <h4>Cadastro de notas da Prof. Alice</h4>
+    Nome do aluno: <input id="iptNomeAluno"> <br>
+    Nota 1: <input id="iptNota1"> <br>
+    Nota 2: <input id="iptNota2"> <br>
+    Nota 3: <input id="iptNota3"> <br><br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="listar()">Listar</button>
+    <button onclick="aluno()">Aluno</button>
+    <button onclick="media()">Média</button>
+    <button onclick="notasMaiorque()">Notas Maior que</button>
+    <br>
+    <div id="div_erro"></div>
+    <div id="div_msg"></div>
+</body>
+<script>
+
+    // Vetor de Cadastro de notas e nomes
+    vt_NomeCadastrado = [];
+    vt_NotaCadastrada = [];
+
+    function cadastrar() {
+        // Variavéis
+        var ax_nome = iptNomeAluno.value;
+        var ax_nota1 = iptNota1.value;
+        var ax_nota2 = iptNota2.value;
+        var ax_nota3 = iptNota3.value;
+        div_erro.innerHTML = "";
+        div_msg.innerHTML = "";
+
+        // Validação do nome
+        if (ax_nome == '' || ax_nome.length > 9) {
+            div_erro.innerHTML += `<br> Tem que estar preenchido, conter ao menos 9 caracteres!`;
+        } else {
+            if (vt_NomeCadastrado.includes(ax_nome)) {
+                div_erro.innerHTML += `<br> Esse nome já existe, não pode ser duplicado!`;
+            } else {
+                vt_NomeCadastrado.push(ax_nome);
+                div_erro.innerHTML += `tudo certo, nome cadastrado`;
+            }
+        }
+
+        // Validação das notas
+        if ((ax_nota1 == '' || (ax_nota1 > 0 && ax_nota1 <= 10))
+            || (ax_nota2 == '' || (ax_nota2 > 0 && ax_nota2 <= 10))
+            || (ax_nota3 == '' || (ax_nota3 > 0 && ax_nota3 <= 10))) {
+            div_erro.innerHTML += `<br> Número da nota deve ser maior que 0 e menor que 10 e deve estar preenchido!`;
+        } else {
+            vt_NotaCadastrada.push(ax_nota1);
+            vt_NotaCadastrada.push(ax_nota2);
+            vt_NotaCadastrada.push(ax_nota3);
+            div_msg.innerHTML = `Notas cadastradas com sucesso!`;
+        }
+    }
+</script>
+
+</html>

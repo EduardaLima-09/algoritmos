@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Interestelar - Arrumada</title>
+</head>
+
+<body>
+    <h2>Interestelar</h2>
+
+    Nome do astronauta: <input id="ipt_astronauta"> <br>
+    Nome do planeta da viagem: <input id="ipt_planeta"> <br>
+    Tempo relativo no planeta: <input id="ipt_tempo"> <br>
+    Quantidade de dias de viagem: <input id="ipt_dias"> <br>
+    Quantidade de horas da viagem: <input id="ipt_horas"> <br>
+    Quantidade de minutos da viagem: <input id="ipt_minutos"> <br><br>
+    <hr>
+    <button onclick="registrar()">Registrar Viagem</button>
+    <button onclick="relatorio()">Relátorio de viagens</button>
+    <button onclick="consulta()">Consulta Astronauta</button>
+    <button onclick="consulta_p()">Consulta Planeta</button>
+
+    <div id="div_msg"></div>
+</body>
+<script>
+    var vetastronauta = [];
+    var vetPlaneta = [];
+    var vetDias = [];
+    var vetHoras = [];
+    var vetMinutos = [];
+    var vetTempo = [];
+    var contando = 0;
+    var anos = [];
+    var minutos = 0;
+
+    function registrar() {
+        var astronauta = ipt_astronauta.value;
+        var planeta = ipt_planeta.value;
+        var dias = Number(ipt_dias.value);
+        var horas = Number(ipt_horas.value);
+        var minutos = Number(ipt_minutos.value);
+        var tempo = Number(ipt_tempo.value);
+
+        var erro = false;
+
+        // Validações
+
+        if (astronauta == '' || planeta == '' || tempo == '' || horas < 0 || minutos < 0 || dias < 0) {
+            alert('Preencha os campos corretamente e informe um tempo de viagem válido!');
+            erro = true;
+        }
+
+        // Cadastro
+        if (erro == false) {
+
+            if (dias <= 24) {}
+            vetastronauta.push(astronauta);
+            vetDias.push(dias);
+            vetHoras.push(horas);
+            vetMinutos.push(minutos);
+            vetTempo.push(tempo);
+            vetPlaneta.push(planeta);
+        }
+    }
+
+    function relatorio() {
+        contando = 0;
+        for (let index = 0; index < vetastronauta.length; index++) {
+            div_msg.innerHTML += '<br> <hr> Nome do astronauta: ' + vetastronauta[index] + ' | Nome do planeta: ' + vetPlaneta[index] + ' | Tempo relativo do planeta: ' 
+            + vetTempo[index] + ' | Quantidade de dias de viagem: ' + vetDias[index] + ' | Quantidade de horas de viagem: ' + vetHoras[index] + ' | Quantidade de horas de viagem: ' 
+            + vetHoras[index] + ' | Quantidade de minutos de viagem: ' + vetMinutos[index];
+            contando += 1;
+
+        }
+
+        div_msg.innerHTML += '<br><hr> Foram registradas' + contando + ' viagens, detalhadas a seguir: ';
+
+
+        for (let index = 0; index < contando; index++) {
+
+            minutos = ((vetDias[index] * 1440) + (vetHoras[index] * 60) * vetTempo[index]) / 525600;
+
+            anos.push(minutos.toFixed(0));
+
+            div_msg.innerHTML += '<br> <br> Viagem ' + (index + 1) + '<br> astronauta ' + vetastronauta[index] + 
+            ' ficou fora por pelo menos ' + anos[index] + ' anos no tempo da terra. A criança que nasceu quando ele saiu provavelmente está assim: ';
+
+            if (anos[index] <= 13) {
+                div_msg.innerHTML += '<br> <img src="1.png" width="100px">';
+            } else if (anos[index] <= 30) {
+                div_msg.innerHTML += '<br> <img src="2.png" width="100px">';
+            } else if (anos[index] <= 65) {
+                div_msg.innerHTML += '<br> <img src="3.png" width="100px">';
+            } else if (anos[index] <= 100) {
+                div_msg.innerHTML += '<br> <img src="img1.png" width="100px">';
+            } else if (anos[index] > 100) {
+                div_msg.innerHTML += '<br> <img src="4.png" width="100px">';
+            }
+        }
+    }
+
+    function consulta_p() {
+        div_msg.innerHTML = '';
+        var planeta_existe = false;
+        var contador_de_viagem_nome_planeta = 0;
+        var con_planeta = prompt('Informe o nome do planeta: ');
+
+        // Viagens com menor tempo
+        var maior_tempo = anos[0];
+        var menor_tempo = anos[0];
+        var menor_tempo2 = anos[0];
+        var maior_tempo2 = anos[0];
+        console.log(vetPlaneta);
+
+        for (let index = 0; index < vetPlaneta.length; index++) {
+            if (maior_tempo < anos[index]) {
+                maior_tempo = anos[index];
+            }
+            if (anos[index] < maior_tempo2 && anos[index] != maior_tempo) {
+                maior_tempo2 = anos[index];
+            }
+            if (menor_tempo > anos[index]) {
+                menor_tempo = anos[index];
+            }
+            if (menor_tempo2 > anos[index] && anos[index] != menor_tempo) {
+                menor_tempo2 = anos[index];
+            }
+            if (vetPlaneta[index] == con_planeta) {
+                contador_de_viagem_nome_planeta += 1;
+                planeta_existe = true;
+                console.log("passei por aqui")
+            }
+
+            console.log(planeta_existe);
+        }
+
+        if (planeta_existe == true) {
+            for (let index = 0; index < vetPlaneta.length; index++) {
+                if (contador_de_viagem_nome_planeta >= 0) {
+                    div_msg.innerHTML += '<br> Planeta ' + vetPlaneta[index] + ' foi visitado por:';
+                    div_msg.innerHTML += '<br>' + (index + 1) + ' viagem - astronalta ' + vetastronauta[index] + ' com o tempo na terra de ' + anos[index] + ' minutos';
+                } else if (contador_de_viagem_nome_astronauta == 1) {
+                    div_msg.innerHTML += '<br> Planeta ' + vetPlaneta[index] + ' foi visitado pelo astronauta ' + vetastronauta[index] + ' com o tempo na terra de ' + anos[index] + ' minutos';
+                }
+            }
+            if (contador_de_viagem_nome_planeta > 1) {
+                div_msg.innerHTML += '<br> VIAGENS COM MAIOR TEMPO: <br> 1 ª viagem - tempo ' + maior_tempo + ' minutos <br> 2 ª viagem - tempo ' + maior_tempo2 + ' minutos';
+                div_msg.innerHTML += '<br> VIAGENS COM MENOR TEMPO: <br> 1 ª viagem - tempo ' + menor_tempo + ' minutos <br> 2 ª viagem - tempo ' + menor_tempo2 + ' minutos';
+            }
+        } else if (planeta_existe == false) {
+            alert('O Planeta  ' + con_planeta + ' não tem viagens registradas');
+        }
+    }
+
+    function consulta() {
+        div_msg.innerHTML = '';
+        var astronauta_existe = false;
+        var contador_de_viagem_nome_astronauta = 0;
+        var con_astronauta = prompt('Informe o nome do astronauta: ');
+
+        // Viagens com maior e menor tempo
+        var maior_tempo = anos[0];
+        var menor_tempo = anos[0];
+        var menor_tempo2 = anos[0];
+        var maior_tempo2 = anos[0]
+        for (let index = 0; index < vetastronauta.length; index++) {
+            if (maior_tempo < anos[index]) {
+                maior_tempo = anos[index];
+            }
+            if (anos[index] < maior_tempo2 && anos[index] != maior_tempo) {
+                maior_tempo2 = anos[index];
+            }
+            if (menor_tempo > anos[index]) {
+                menor_tempo = anos[index];
+            }
+            if (menor_tempo2 > anos[index] && anos[index] != menor_tempo) {
+                menor_tempo2 = anos[index];
+            }
+            if (vetastronauta[index] == con_astronauta) {
+                contador_de_viagem_nome_astronauta += 1;
+                astronauta_existe = true;
+            }
+        }
+
+        if (astronauta_existe == true) {
+            for (let index = 0; index < vetastronauta.length; index++) {
+                if (contador_de_viagem_nome_astronauta > 0) {
+                    div_msg.innerHTML += '<br> Astronauta ' + vetastronauta[index] + ' viajou para:';
+                    div_msg.innerHTML += '<br>' + (index + 1) + ' viagem - planeta ' + vetPlaneta[index] + ' com o tempo na terra de ' + anos[index] + ' minutos';
+                } else if (contador_de_viagem_nome_astronauta == 1) {
+                    div_msg.innerHTML += '<br> Astronauta ' + vetastronauta[index] + ' viajou para o planeta ' + vetPlaneta[index] + ' com o tempo na terra de ' + anos[index] + ' minutos';
+                }
+            }
+            if (contador_de_viagem_nome_astronauta > 0) {
+                div_msg.innerHTML += '<br> VIAGENS COM MAIOR TEMPO: <br> 1 ª viagem - tempo ' + maior_tempo + ' minutos <br> 2 ª viagem - tempo ' + maior_tempo2 + ' minutos';
+                div_msg.innerHTML += '<br> VIAGENS COM MENOR TEMPO: <br> 1 ª viagem - tempo ' + menor_tempo + ' minutos <br> 2 ª viagem - tempo ' + menor_tempo2 + ' minutos';
+            }
+        } else if (astronauta_existe == false) {
+            alert('O astronauta ' + con_astronauta + ' não tem viagens registradas');
+        }
+    }
+</script>
+
+</html>

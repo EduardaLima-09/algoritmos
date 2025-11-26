@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 10A - Exercicio 05</title>
+</head>
+
+<body>
+    <h4>JO KEN PO</h4>
+    <button onclick="jogar()">Jogar</button> <br>
+    <h3>Pontuação: </h3>
+    <div id="div_jogador1"></div>
+    <div id="div_jogador2"></div>
+</body>
+<script>
+
+    // Jogadores
+    var jogador1 = 0;
+    var jogador2 = 0;
+    var jogador1Ganhou = false;
+    var jogador2Ganhou = false;
+
+    // Opções
+    var J1Pedra = false;
+    var J1Papel = false;
+    var J1Tesoura = false;
+
+    var J2Pedra = false;
+    var J2Papel = false;
+    var J2Tesoura = false;
+
+    // Pontuação dos jogadores
+    var pontoJogador1 = 0;
+    var pontoJogador2 = 0;
+
+    function jogar() {
+        var numeroUm = (Math.ramdom() * 2 + 1).toFixed(0);
+        var numeroDois = (Math.ramdom() * 2 + 1).toFixed(0);
+
+        for (var index = 0; index < numeroUm; index++) {
+            numeroUm = jogador1;
+            numeroDois = jogador2;
+
+            if (jogador1 == 1) {
+                J1Papel = true;
+                div_jogador1.innerHTML = `<img src="joguinho/Folha.png" witdh="200px"`;
+            } else if (jogador1 == 2) {
+                J1Pedra = true;
+                div_jogador1.innerHTML = `<img src="joguinho/Pedra.png" witdh="200px"`;
+            } else {
+                J1Tesoura = true;
+                div_jogador1.innerHTML = `<img src="joguinho/Tesoura.png" witdh="200px"`;
+                if (jogador2 == 1) {
+                    J1Papel = false;
+                    J2Papel = true;
+                    div_jogador2.innerHTML = `<img src="joguinho/Folha.png" witdh="200px"`;
+                } else if (jogador2 == 2) {
+                    J1Pedra = false;
+                    J2Pedra = true;
+                    div_jogador2.innerHTML = `<img src="joguinho/Pedra.png" witdh="200px"`;
+                } else {
+                    J1Tesoura = false;
+                    J2Tesoura = true;
+                    div_jogador2.innerHTML = `<img src="joguinho/Tesoura.png" witdh="200px"`;
+                }
+            }
+        }
+        div_jogador1.innerHTML = `${jogador1}`;
+        div_jogador2.innerHTML = `${jogador2}`;
+    }
+</script>
+
+</html>

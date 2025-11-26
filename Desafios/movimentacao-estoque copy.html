@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especificação Funcional de Movimentação de Estoque</title>
+</head>
+
+<body>
+    <h2>Movimentação do seu estoque</h2>
+    <hr><br>
+    Identificação do Produto: <input id="ipt_identificacao"> <br><br>
+    Quantidade: <input id="ipt_quantidade"> <br><br>
+    Categoria:
+    <select id="select_categoria">
+        <option value="0">Selecione...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <br><br>
+    Preço Unitário: <input id="ipt_precoUnitario"> <br>
+    <br>
+    <hr>
+    <button onclick="compra()">Compra</button>
+    <button onclick="venda()">Venda</button>
+    <br>
+    <hr>
+    <button onclick="listarVendaPromocional()">Lista de Venda Promocional</button>
+    <button onclick="listaGeral()">Lista Geral</button>
+    <button onclick="listaCategoria()">Lista por Categoria</button>
+    <button onclick="listaProduto()">Lista Produto</button>
+    <hr>
+    <div id="div_msg"></div>
+    <br>
+    <hr>
+    <div id="div_cat1"></div> <br>
+    <div id="div_cat2"></div> <br>
+    <div id="div_cat3"></div> <br>
+    <div id="div_cat4"></div>
+</body>
+<script>
+
+    var vt_identificacaoProduto = [];
+    var vt_quantidadeProduto = [];
+    var vt_categoriaProduto = [];
+    var vt_pme = [];
+    var vt_pvm = [];
+
+    function compra() {
+        var id = ipt_identificacao.value;
+        var qtde = Number(ipt_quantidade.value);
+        var categoria = Number(select_categoria.value);
+        var precoUnitario = Number(ipt_precoUnitario.value);
+
+        var mensagem_erro = '';
+        div_msg.innerHTML = '';
+
+        if (id == '') {
+            mensagem_erro += `<b> A Identificação do Produto é obrigatória!`;
+        }
+        if (qtde == '' || qtde < 0 || qtde % 1 !== 0) {
+            mensagem_erro += `<br><b> A Quantidade deve ser um número inteiro positivo!`;
+        }
+        if (categoria == '' || categoria < 1 || categoria > 4) {
+            mensagem_erro += `<br><b> A Categoria deve ser um dos valores: 1, 2, 3 ou 4`;
+        }
+        if (precoUnitario < 0 || precoUnitario == '') {
+            mensagem_erro += `<br><b> O Preço Unitário deve ser um valor monetário positivo`;
+        }
+
+        if (mensagem_erro != '') {
+            div_msg.innerHTML = `${mensagem_erro}`;
+        } else {
+            div_msg.innerHTML = '';
+
+            for (var ind = 0; ind < vt_identificacaoProduto.length; ind++) {
+                if (vt_identificacaoProduto[ind] == id) {
+                    break;
+                }
+            }
+
+            if (ind == vt_identificacaoProduto.length) {
+
+                vt_identificacaoProduto.push(id);
+                vt_quantidadeProduto.push(qtde);
+                vt_categoriaProduto.push(categoria);
+                vt_pme.push(precoUnitario);
+
+            } else {
+                if (vt_categoriaProduto[ind] == categoria) {
+                    vt_quantidadeProduto[ind] += qtde;
+                    if (vt_pme[ind] != precoUnitario) {
+                        vt_pme[ind] = ((vt_quantidadeProduto[ind] * vt_pme[ind]) +
+                            (qtde * precoUnitario)) / (vt_quantidadeProduto[ind] + qtde);
+                    }
+                } else {
+                    alert(`A categoria informada ${categoria} é diferente da categoria cadastrada ${vt_categoriaProduto[ind]} para o produto ${vt_identificacaoProduto[ind]}. Não é possível realizar a compra.`);
+                }
+            }
+
+            div_msg.innerHTML += `Compra do produto ${vt_identificacaoProduto[ind]} registrada. Estoque atualizado para ${vt_quantidadeProduto[ind]}. Novo PME: ${vt_pme[ind]}.`;
+        }
+    }
+
+    function venda() {
+        var id = ipt_identificacao.value;
+        var qtde = Number(ipt_quantidade.value);
+        var categoria = Number(select_categoria.value);
+        var precoUnitario = Number(ipt_precoUnitario.value);
+
+        var mensagem_erro = '';
+        div_msg.innerHTML = '';
+
+        if (id == '') {
+            mensagem_erro += `<b> A Identificação do Produto é obrigatória!`;
+        }
+        if (qtde == '' || qtde < 0 || qtde % 1 !== 0) {
+            mensagem_erro += `<br><b> A Quantidade deve ser um número inteiro positivo!`;
+        }
+        if (categoria == '' || categoria < 1 || categoria > 4) {
+            mensagem_erro += `<br><b> A Categoria deve ser um dos valores: 1, 2, 3 ou 4`;
+        }
+        if (precoUnitario < 0 || precoUnitario == '') {
+            mensagem_erro += `<br><b> O Preço Unitário deve ser um valor monetário positivo`;
+        }
+
+        if (mensagem_erro != '') {
+            div_msg.innerHTML = `${mensagem_erro}`;
+        } else {
+            var existe = false;
+            var contador = 0;
+
+            for (var index = 0; index < vt_identificacaoProduto.length; index++) {
+                if (vt_identificacaoProduto[index] == id) {
+                    existe = true;
+                    contador = index;
+                    break;
+                }
+            }
+
+            if (existe == false) {
+                alert(`Produto ${id} não encontrado no cadastro. Não é possível realizar a venda.`);
+            } else {
+
+                if (categoria == vt_categoriaProduto[contador]) {
+                    if (qtde <= vt_quantidadeProduto[contador]) {
+
+                        if (vt_categoriaProduto[contador] == 1) {
+                            vt_pvm[contador] = vt_pme[contador] * 1.10;
+                        }
+                        if (vt_categoriaProduto[contador] == 2) {
+                            vt_pvm[contador] = vt_pme[contador] * 1.205;
+                        }
+                        if (vt_categoriaProduto[contador] == 3) {
+                            vt_pvm[contador] = vt_pme[contador] * 1.175;
+                        }
+                        if (vt_categoriaProduto[contador] == 4) {
+                            vt_pvm[contador] = vt_pme[contador] * 1.32;
+                        }
+
+                        if (precoUnitario >= vt_pvm[contador]) {
+                            vt_quantidadeProduto[contador] = vt_quantidadeProduto[contador] - qtde;
+                            alert(`Venda do produto ${id} registrada. Estoque atualizado para ${vt_quantidadeProduto[contador]}.`);
+                        } else {
+                            var pop = prompt(`O Preço Unitário informado ${precoUnitario} é menor que o Preço de Venda Mínimo 
+                            ${vt_pvm[contador].toFixed(2)}. Confirma a venda promocional? (sim/não)`);
+
+                            while (pop != 'sim' && pop != 'não') {
+                                pop = prompt(`O Preço Unitário informado ${precoUnitario} é menor que o Preço de Venda Mínimo 
+                                ${vt_pvm[contador].toFixed(2)}. Confirma a venda promocional? (sim/não)`);
+                            }
+
+                            if (pop == 'sim') {
+                                vt_quantidadeProduto[contador] -= qtde;
+                                alert(`Venda promocional do produto ${id} confirmada. Estoque atualizado para ${vt_quantidadeProduto[contador]}.`);
+                            } else {
+                                alert(`O Preço Unitário informado ${precoUnitario} é menor que o Preço de Venda Mínimo ${vt_pvm[contador].toFixed(2)} 
+                                calculado para a Categoria ${categoria}. Venda não realizada.`);
+                            }
+                        }
+
+                    } else {
+                        alert(`Quantidade informada ${qtde} excede a Quantidade em Estoque disponível ${vt_quantidadeProduto[contador]} para o produto ${id}. 
+                        Venda não realizada.`);
+                    }
+
+                } else {
+                    alert(`A categoria informada ${categoria} é diferente da categoria cadastrada ${vt_categoriaProduto[contador]} para o produto ${id}. 
+                    Não é possível realizar a venda.`);
+                }
+            }
+        }
+    }
+
+    function listarVendaPromocional() {
+
+        div_msg.innerHTML = "LISTA DE VENDAS PROMOCIONAIS<br><br>";
+        for (var i = 0; i < vt_identificacaoProduto.length; i++) {
+            if (vt_pvm[i] > vt_pme[i]) {
+                div_msg.innerHTML +=
+                    "Produto: " + vt_identificacaoProduto[i] +
+                    " | Qtd: " + vt_quantidadeProduto[i] +
+                    " | Cat: " + vt_categoriaProduto[i] +
+                    " | PME: " + vt_pme[i].toFixed(2) +
+                    " | PVM: " + vt_pvm[i].toFixed(2) + "<br>";
+            }
+        }
+    }
+
+    function listaGeral() {
+        div_msg.innerHTML = "LISTA GERAL<br><br>";
+        var total = 0;
+        for (var i = 0; i < vt_quantidadeProduto.length; i++) {
+            total += vt_quantidadeProduto[i];
+        }
+        for (var i = 0; i < vt_identificacaoProduto.length; i++) {
+            var perc = 0;
+            if (total > 0) {
+                perc = (vt_quantidadeProduto[i] / total) * 100;
+            }
+            div_msg.innerHTML +=
+                "Produto: " + vt_identificacaoProduto[i] +
+                " | Qtd: " + vt_quantidadeProduto[i] +
+                " | Cat: " + vt_categoriaProduto[i] +
+                " | PME: " + vt_pme[i].toFixed(2) +
+                " | PVM: " + vt_pvm[i] +
+                " | % Total: " + perc.toFixed(1) + "%<br>";
+        }
+    }
+
+    function listaCategoria() {
+        var categoria = Number(select_categoria.value);
+        div_msg.innerHTML = "LISTA POR CATEGORIA<br><br>";
+        for (categoria = 1; categoria <= 4; categoria++) {
+            div_msg.innerHTML += "Categoria " + categoria + "<br>";
+            for (var i = 0; i < vt_identificacaoProduto.length; i++) {
+                if (vt_categoriaProduto[i] == categoria) {
+                    div_msg.innerHTML +=
+                        "Produto: " + vt_identificacaoProduto[i] +
+                        " | Qtd: " + vt_quantidadeProduto[i] +
+                        " | PME: " + vt_pme[i].toFixed(2) +
+                        " | PVM: " + vt_pvm[i] + "<br>";
+                }
+            }
+            div_msg.innerHTML += "<br>";
+        }
+    }
+
+    function listaProduto() {
+        div_msg.innerHTML = "LISTA DE PRODUTOS<br><br>";
+        for (var i = 0; i < vt_identificacaoProduto.length; i++) {
+            div_msg.innerHTML +=
+                "Produto: " + vt_identificacaoProduto[i] +
+                " | Qtd: " + vt_quantidadeProduto[i] +
+                " | Cat: " + vt_categoriaProduto[i] +
+                " | PME: " + vt_pme[i].toFixed(2) +
+                " | PVM: " + vt_pvm[i] + "<br>";
+        }
+    }
+
+</script>
+
+</html>
